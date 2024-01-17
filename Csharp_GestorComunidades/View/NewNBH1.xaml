@@ -1,0 +1,32 @@
+﻿<Window x:Class="Csharp_GestorComunidades.NewNBH1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Csharp_GestorComunidades"
+        mc:Ignorable="d"
+        Title="NewNBH1" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="txtTitle" Content="NUEVA COMUNIDAD" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <TextBox x:Name="tbNameNBH" HorizontalAlignment="Left" Margin="200,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbAddress" HorizontalAlignment="Left" Margin="200,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtName" Content="Nombre de la comunidad" HorizontalAlignment="Left" Margin="49,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtAddress" Content="Dirección de la comunidad" HorizontalAlignment="Left" Margin="49,128,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtAddress_Copiar" Content="Fecha de creación (agregar calendario)" HorizontalAlignment="Left" Margin="49,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtMetros" Content="Superficie de la comunidad (m2)" HorizontalAlignment="Left" Margin="368,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtNumPortales" Content="Define el número de portales" HorizontalAlignment="Left" Margin="368,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtPool" Content="¿Tiene piscina?" HorizontalAlignment="Left" Margin="49,242,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.463,0.501"/>
+        <Label x:Name="txtBath" Content="¿Tiene zona de duchas comunitaria?" HorizontalAlignment="Left" Margin="330,268,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtGateKeeper" Content="¿El portero de la comunidad tiene un apartamento?" HorizontalAlignment="Left" Margin="368,128,0,0" VerticalAlignment="Top" Height="26" Width="285"/>
+        <Label x:Name="txtPlayGround" Content="¿Tiene zona de parque infantil?" HorizontalAlignment="Left" Margin="330,298,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtExercise" Content="¿Tiene zona deportiva?" HorizontalAlignment="Left" Margin="49,268,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtMeetings" Content="¿Tiene zona de reuniones?" HorizontalAlignment="Left" Margin="330,242,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtPadel" Content="¿Tiene pista de padel?" HorizontalAlignment="Left" Margin="49,327,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtTenis" Content="¿Tiene pista de tenis?" HorizontalAlignment="Left" Margin="49,298,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbMetros" HorizontalAlignment="Left" Margin="562,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Image Margin="542,87,175,315" Source="/Image2.png" Stretch="Fill"/>
+        <Image Margin="658,130,83,282" Source="/Image3.png" Stretch="Fill"/>
+        <Button x:Name="btnNext" Content="Siguiente" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100"/>
+
+    </Grid>
+</Window>
