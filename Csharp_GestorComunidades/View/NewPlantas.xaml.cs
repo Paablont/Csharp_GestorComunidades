@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Csharp_GestorComunidades
+namespace Csharp_GestorComunidades.View
 {
-   
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Lógica de interacción para NewPlantas.xaml
+    /// </summary>
+    public partial class NewPlantas : Window
     {
-
-        public MainWindow()
+        public NewPlantas()
         {
             InitializeComponent();
         }
-        private void OpenNewComunity(object sender, RoutedEventArgs e)
-        {
-            NewNBH1 otherWindow = new NewNBH1();
-            otherWindow.Show();
-        }
-
     }
 }

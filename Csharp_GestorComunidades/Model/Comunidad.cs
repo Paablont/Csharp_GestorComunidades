@@ -10,11 +10,11 @@ namespace Csharp_GestorComunidades.Clases
 {
     class Comunidad : INotifyPropertyChanged
     {
-        #region ATRIBUTOS
-        
+        #region ATRIBUTES
+
         private string _nombreComunidad, _direccion, _fecha;
         //Como bool no existe en BBDD, piscina = 1 si tiene, piscina = 0 no tiene
-        private int _numComunidad,_metrosCuadrados,_piscina;
+        private int _metrosCuadrados,_piscina;
 
         private List<Portal> _listaPortales;
         // Método que se encarga de actualizar las propiedades en cada cambio
@@ -25,10 +25,9 @@ namespace Csharp_GestorComunidades.Clases
         }
         #endregion
 
-        #region CONSTRUCT,GET,SET
-        public Comunidad(int numComunidad,string nombreComunidad, string direccion, string fecha, int metrosCuadrados, int piscina,List<Portal> listaPortales)
+        #region CONSTRUCT
+        public Comunidad(string nombreComunidad, string direccion, string fecha, int metrosCuadrados, int piscina,List<Portal> listaPortales)
         {
-            _numComunidad = numComunidad;
             _nombreComunidad = nombreComunidad;
             _direccion = direccion;
             _fecha = fecha;
@@ -36,15 +35,10 @@ namespace Csharp_GestorComunidades.Clases
             _piscina = piscina;
             _listaPortales = listaPortales;
         }
-        public int NumComunidad
-        {
-            get { return _numComunidad; }
-            set
-            {
-                _numComunidad = value;
-                OnPropertyChange(nameof(NumComunidad));
-            }
-        }
+
+        #endregion
+        #region GET,SET
+        
         public string NombreComunidad
         {
             get { return _nombreComunidad; }
