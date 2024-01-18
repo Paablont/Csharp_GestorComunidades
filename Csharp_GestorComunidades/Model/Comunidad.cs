@@ -18,7 +18,7 @@ namespace Csharp_GestorComunidades.Clases
         private string _nameNeigh, _address, _date;
 
         private int _metrosCuadrados;
-        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper;
+        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
 
         private List<Portal> _listaPortales;
         // Método que se encarga de actualizar las propiedades en cada cambio
@@ -29,10 +29,25 @@ namespace Csharp_GestorComunidades.Clases
 
         #endregion
 
-        #region CONSTRUCT
-
-
+        #region CONST
+        public Comunidad(string nameNeighb, string address, string date, int metrosCuadrados, bool hasPool, bool hasPadel, bool hasTenis, bool hasMeetings, bool hasGym, bool hasPlayground, bool hasGatekeeper, bool hasShower, List<Portal> listaPortales)
+        {
+            _nameNeigh = nameNeighb;
+            _address = address;
+            _date = date;
+            _metrosCuadrados = metrosCuadrados;
+            _hasPool = hasPool;
+            _hasPadel = hasPadel;
+            _hasTenis = hasTenis;
+            _hasMeetings = hasMeetings;
+            _hasGym = hasGym;
+            _hasPlayground = hasPlayground;
+            _hasGatekeeper = hasGatekeeper;
+            _hasShower = hasShower;
+            _listaPortales = listaPortales;
+        }
         #endregion
+
         #region GET,SET
 
         public string NameNeighborhood
@@ -143,6 +158,16 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
+        public bool HasShower
+        {
+            get { return _hasShower; }
+            set
+            {
+                _hasShower = value;
+                OnPropertyChange(nameof(HasShower));
+            }
+        }
+
         public List<Portal> ListaPortales
         {
             get { return _listaPortales; }
@@ -152,6 +177,7 @@ namespace Csharp_GestorComunidades.Clases
                 OnPropertyChange(nameof(ListaPortales));
             }
         }
+
 
 
         #endregion

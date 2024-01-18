@@ -19,7 +19,7 @@ namespace Csharp_GestorComunidades.ModelView
         private string _nameNeigh, _address, _date;
 
         private int _metrosCuadrados;
-        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper;
+        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
 
         private List<Portal> _listaPortales;
         // Método que se encarga de actualizar las propiedades en cada cambio
@@ -31,7 +31,7 @@ namespace Csharp_GestorComunidades.ModelView
         #endregion
 
         #region CONST
-        public ComunidadModelView(string nameNeighb, string address, string date, int metrosCuadrados, bool hasPool, bool hasPadel, bool hasTenis, bool hasMeetings, bool hasGym, bool hasPlayground, bool hasGatekeeper, List<Portal> listaPortales)
+        public ComunidadModelView(string nameNeighb, string address, string date, int metrosCuadrados, bool hasPool, bool hasPadel, bool hasTenis, bool hasMeetings, bool hasGym, bool hasPlayground, bool hasGatekeeper, bool hasShower, List<Portal> listaPortales)
         {
             _nameNeigh = nameNeighb;
             _address = address;
@@ -44,6 +44,7 @@ namespace Csharp_GestorComunidades.ModelView
             _hasGym = hasGym;
             _hasPlayground = hasPlayground;
             _hasGatekeeper = hasGatekeeper;
+            _hasShower = hasShower;
             _listaPortales = listaPortales;
         }
         #endregion
@@ -158,6 +159,16 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
+        public bool HasShower
+        {
+            get { return _hasShower; }
+            set
+            {
+                _hasShower = value;
+                OnPropertyChange(nameof(HasShower));
+            }
+        }
+
         public List<Portal> ListaPortales
         {
             get { return _listaPortales; }
@@ -169,10 +180,18 @@ namespace Csharp_GestorComunidades.ModelView
         }
 
 
+
         #endregion
 
         #region SQL
-        
+        public void newNeighborhood()
+        {
+            String SQL = $"INSERT INTO partido (nombre,direccion,fecha,metroscuadrados,piscina,tienePortero,tieneZonaDuchas,tieneZonaInfantil,tieneZonaDeporte,tieneZonaReuniones,tieneTenis,tienePadel)" +
+                $" VALUES ('{NameNeighborhood}','{Address}', '{Date}', '{MetrosCuadrados}', '{HasPool}', '{HasGateKeeper}, '{HasShower}', '{HasPlayground}', '{HasGym}', '{HasMeetings}', '{HasTenis}', '{HasPadel}'');";
+            //usaremos las clases de la librería de MySQL para ejecutar queries
+            //Instalar el paquete MySQL.Data
+            MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        }
         #endregion
 
 
