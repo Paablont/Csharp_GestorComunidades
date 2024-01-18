@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,71 +12,56 @@ namespace Csharp_GestorComunidades.Clases
     class Comunidad : INotifyPropertyChanged
     {
         #region ATRIBUTES
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string _nombreComunidad, _direccion, _fecha;
-        //Como bool no existe en BBDD, piscina = 1 si tiene, piscina = 0 no tiene
-        private int _metrosCuadrados,_piscina;
+        private string _nameNeigh, _address, _date;
+
+        private int _metrosCuadrados;
+        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper;
 
         private List<Portal> _listaPortales;
         // Método que se encarga de actualizar las propiedades en cada cambio
-        public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
         #region CONSTRUCT
-        public Comunidad(string nombreComunidad, string direccion, string fecha, int metrosCuadrados, int piscina,List<Portal> listaPortales)
-        {
-            _nombreComunidad = nombreComunidad;
-            _direccion = direccion;
-            _fecha = fecha;
-            _metrosCuadrados = metrosCuadrados;
-            _piscina = piscina;
-            _listaPortales = listaPortales;
-        }
+
 
         #endregion
         #region GET,SET
-        
-        public string NombreComunidad
+
+        public string NameNeighborhood
         {
-            get { return _nombreComunidad; }
+            get { return _nameNeigh; }
             set
             {
-                _nombreComunidad = value;
-                OnPropertyChange(nameof(NombreComunidad));
+                _nameNeigh = value;
+                OnPropertyChange(nameof(NameNeighborhood));
             }
         }
 
-        public string Fecha
+        public string Date
         {
-            get { return _fecha; }
+            get { return _date; }
             set
             {
-                _fecha = value;
-                OnPropertyChange(nameof(Fecha));
+                _date = value;
+                OnPropertyChange(nameof(Date));
             }
         }
 
-        public string Direccion
+        public string Address
         {
-            get { return _direccion; }
+            get { return _address; }
             set
             {
-                _direccion = value;
-                OnPropertyChange(nameof(Direccion));
-            }
-        }
-
-        public int Piscina
-        {
-            get { return _piscina; }
-            set
-            {
-                _piscina = value;
-                OnPropertyChange(nameof(Piscina));
+                _address = value;
+                OnPropertyChange(nameof(Address));
             }
         }
 
@@ -89,16 +75,88 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
+        public bool HasPool
+        {
+            get { return _hasPool; }
+            set
+            {
+                _hasPool = value;
+                OnPropertyChange(nameof(HasPool));
+            }
+        }
+
+        public bool HasPadel
+        {
+            get { return _hasPadel; }
+            set
+            {
+                _hasPadel = value;
+                OnPropertyChange(nameof(HasPadel));
+            }
+        }
+
+        public bool HasTenis
+        {
+            get { return _hasTenis; }
+            set
+            {
+                _hasTenis = value;
+                OnPropertyChange(nameof(HasTenis));
+            }
+        }
+        public bool HasMeetings
+        {
+            get { return _hasMeetings; }
+            set
+            {
+                _hasMeetings = value;
+                OnPropertyChange(nameof(HasMeetings));
+            }
+        }
+        public bool HasPlayground
+        {
+            get { return _hasPlayground; }
+            set
+            {
+                _hasPlayground = value;
+                OnPropertyChange(nameof(HasPlayground));
+            }
+        }
+
+        public bool HasGym
+        {
+            get { return _hasGym; }
+            set
+            {
+                _hasGym = value;
+                OnPropertyChange(nameof(HasGym));
+            }
+        }
+
+        public bool HasGateKeeper
+        {
+            get { return _hasGatekeeper; }
+            set
+            {
+                _hasGatekeeper = value;
+                OnPropertyChange(nameof(HasGateKeeper));
+            }
+        }
+
         public List<Portal> ListaPortales
         {
             get { return _listaPortales; }
             set
             {
                 _listaPortales = value;
-                OnPropertyChange(nameof(ListaPortales));    
+                OnPropertyChange(nameof(ListaPortales));
             }
         }
+
+
         #endregion
+
+
 
 
     }
