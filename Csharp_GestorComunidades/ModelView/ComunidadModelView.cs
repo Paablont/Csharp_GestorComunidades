@@ -2,6 +2,7 @@
 using Csharp_GestorComunidades.DDBB;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,12 @@ namespace Csharp_GestorComunidades.ModelView
         #region ATRIBUTES
         private const String cnstr = "server=localhost;uid=pablo;pwd=pablo;database=comunidad";
         public event PropertyChangedEventHandler? PropertyChanged;
+        private ObservableCollection<Comunidad> _listNBH;
+        private string _nameNeigh = "", _address= "";
+        private DateTime _date;
 
-        private string _nameNeigh, _address, _date;
-
-        private int _metrosCuadrados;
-        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
+        private int _metrosCuadrados=0,_numPortales=0;
+        private bool _hasPool=false, _hasPadel = false, _hasTenis = false, _hasMeetings = false, _hasGym, _hasPlayground = false, _hasGatekeeper = false, _hasShower = false;
 
         private List<Portal> _listaPortales;
         // Método que se encarga de actualizar las propiedades en cada cambio
@@ -31,21 +33,9 @@ namespace Csharp_GestorComunidades.ModelView
         #endregion
 
         #region CONST
-        public ComunidadModelView(string nameNeighb, string address, string date, int metrosCuadrados, bool hasPool, bool hasPadel, bool hasTenis, bool hasMeetings, bool hasGym, bool hasPlayground, bool hasGatekeeper, bool hasShower, List<Portal> listaPortales)
+        public ComunidadModelView()
         {
-            _nameNeigh = nameNeighb;
-            _address = address;
-            _date = date;
-            _metrosCuadrados = metrosCuadrados;
-            _hasPool = hasPool;
-            _hasPadel = hasPadel;
-            _hasTenis = hasTenis;
-            _hasMeetings = hasMeetings;
-            _hasGym = hasGym;
-            _hasPlayground = hasPlayground;
-            _hasGatekeeper = hasGatekeeper;
-            _hasShower = hasShower;
-            _listaPortales = listaPortales;
+            _listNBH = new ObservableCollection<Comunidad>();
         }
         #endregion
 
@@ -60,8 +50,17 @@ namespace Csharp_GestorComunidades.ModelView
                 OnPropertyChange(nameof(NameNeighborhood));
             }
         }
+        public int NumPortales
+        {
+            get { return _numPortales; }
+            set
+            {
+                _numPortales = value;
+                OnPropertyChange(nameof(NumPortales));
+            }
+        }
 
-        public string Date
+        public DateTime Date
         {
             get { return _date; }
             set
@@ -179,6 +178,15 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
+        public ObservableCollection<Comunidad> ListNBH
+        {
+            get { return _listNBH; }
+            set
+            {
+                _listNBH = value;
+                OnPropertyChange("ListNBH");
+            }
+        }
 
 
         #endregion
@@ -186,8 +194,9 @@ namespace Csharp_GestorComunidades.ModelView
         #region SQL
         public void newNeighborhood()
         {
-            String SQL = $"INSERT INTO partido (nombre,direccion,fecha,metroscuadrados,piscina,tienePortero,tieneZonaDuchas,tieneZonaInfantil,tieneZonaDeporte,tieneZonaReuniones,tieneTenis,tienePadel)" +
-                $" VALUES ('{NameNeighborhood}','{Address}', '{Date}', '{MetrosCuadrados}', '{HasPool}', '{HasGateKeeper}, '{HasShower}', '{HasPlayground}', '{HasGym}', '{HasMeetings}', '{HasTenis}', '{HasPadel}'');";
+            //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
+            String SQL = $"INSERT INTO comunidad (nombre,direccion,fecha,numPortales,metroscuadrados,piscina,tienePortero,tieneZonaDuchas,tieneZonaInfantil,tieneZonaDeporte,tieneZonaReuniones,tieneTenis,tienePadel)" +
+                $" VALUES ('{NameNeighborhood}','{Address}', '{Date.ToString("yyyy-MM-dd")}', '{NumPortales}', '{MetrosCuadrados}', '{(HasPool? 1 : 0)}', '{(HasGateKeeper ? 1 : 0)}', '{(HasShower ? 1 : 0)}', '{(HasPlayground ? 1 : 0)}', '{(HasGym ? 1 : 0)}', '{(HasMeetings ? 1 : 0)}', '{(HasTenis ? 1 : 0)}', '{(HasPadel ? 1 : 0)}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);

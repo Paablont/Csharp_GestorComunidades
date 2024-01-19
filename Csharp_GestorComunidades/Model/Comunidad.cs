@@ -15,9 +15,10 @@ namespace Csharp_GestorComunidades.Clases
         
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string _nameNeigh, _address, _date;
+        private string _nameNeigh, _address;
+        private DateTime _date;
 
-        private int _metrosCuadrados;
+        private int _metrosCuadrados,_numPortales;
         private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
 
         private List<Portal> _listaPortales;
@@ -30,21 +31,10 @@ namespace Csharp_GestorComunidades.Clases
         #endregion
 
         #region CONST
-        public Comunidad(string nameNeighb, string address, string date, int metrosCuadrados, bool hasPool, bool hasPadel, bool hasTenis, bool hasMeetings, bool hasGym, bool hasPlayground, bool hasGatekeeper, bool hasShower, List<Portal> listaPortales)
+       
+        public Comunidad()
         {
-            _nameNeigh = nameNeighb;
-            _address = address;
-            _date = date;
-            _metrosCuadrados = metrosCuadrados;
-            _hasPool = hasPool;
-            _hasPadel = hasPadel;
-            _hasTenis = hasTenis;
-            _hasMeetings = hasMeetings;
-            _hasGym = hasGym;
-            _hasPlayground = hasPlayground;
-            _hasGatekeeper = hasGatekeeper;
-            _hasShower = hasShower;
-            _listaPortales = listaPortales;
+
         }
         #endregion
 
@@ -59,8 +49,17 @@ namespace Csharp_GestorComunidades.Clases
                 OnPropertyChange(nameof(NameNeighborhood));
             }
         }
+        public int NumPortales
+        {
+            get { return _numPortales; }
+            set
+            {
+                _numPortales = value;
+                OnPropertyChange(nameof(NumPortales));
+            }
+        }
 
-        public string Date
+        public DateTime Date
         {
             get { return _date; }
             set

@@ -7,25 +7,26 @@
         mc:Ignorable="d"
         Title="NewNBH1" Height="450" Width="800">
     <Grid>
-        <Label x:Name="txtTitle" Content="NUEVA COMUNIDAD" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-        <TextBox x:Name="tbNameNBH" HorizontalAlignment="Left" Margin="205,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbAddress" HorizontalAlignment="Left" Margin="205,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="txtName" Content="Nombre de la comunidad" HorizontalAlignment="Left" Margin="49,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtTitle"  Content="NUEVA COMUNIDAD" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+        <TextBox x:Name="tbNameNBH" Text="{Binding NameNeighborhood, Mode=TwoWay}" HorizontalAlignment="Left" Margin="205,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbAddress" Text="{Binding Address, Mode=TwoWay}" HorizontalAlignment="Left" Margin="205,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtName"  Content="Nombre de la comunidad" HorizontalAlignment="Left" Margin="49,93,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtAddress" Content="Dirección de la comunidad" HorizontalAlignment="Left" Margin="49,128,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="txtAddress_Copiar" Content="Fecha de creación (agregar calendario)" HorizontalAlignment="Left" Margin="49,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtAddress_Copiar" Content="Fecha de creación" HorizontalAlignment="Left" Margin="49,161,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtMetros" Content="Superficie de la comunidad (m2)" HorizontalAlignment="Left" Margin="368,128,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtNumPortales" Content="Define el número de portales" HorizontalAlignment="Left" Margin="368,88,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbMetros" HorizontalAlignment="Left" Margin="554,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnNext" Content="Siguiente" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100"/>
-        <TextBox x:Name="tbNumPortales" HorizontalAlignment="Left" Margin="554,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="cbPiscina" Content="¿Tiene piscina?" HorizontalAlignment="Left" Margin="57,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbGimnasio" Content="¿Tiene gimnasio?" HorizontalAlignment="Left" Margin="57,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbPadel" Content="¿Tiene pista de padel?" HorizontalAlignment="Left" Margin="56,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbTenis" Content="¿Tiene pista de padel?" HorizontalAlignment="Left" Margin="56,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbReuniones" Content="¿Tiene zona de reuniones?" HorizontalAlignment="Left" Margin="245,206,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbDuchas" Content="¿Tiene duchas comunitarias?" HorizontalAlignment="Left" Margin="245,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cdInfantil" Content="¿Tiene parque infantil?" HorizontalAlignment="Left" Margin="245,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
-        <CheckBox x:Name="cbGateKeeper" Content="¿El portero de la comunidad tiene un apartamento?" HorizontalAlignment="Left" Margin="245,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <TextBox x:Name="tbMetros" Text="{Binding MetrosCuadrados, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnNext"  Content="Siguiente" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="addNeighborhood"/>
+        <TextBox x:Name="tbNumPortales" Text="{Binding NumPortales, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="cbPiscina" IsChecked="{Binding HasPool, Mode=TwoWay}" Content="¿Tiene piscina?" HorizontalAlignment="Left" Margin="57,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbGimnasio" IsChecked="{Binding HasGym, Mode=TwoWay}" Content="¿Tiene gimnasio?" HorizontalAlignment="Left" Margin="57,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbPadel" IsChecked="{Binding HasPadel, Mode=TwoWay}" Content="¿Tiene pista de padel?" HorizontalAlignment="Left" Margin="56,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbTenis" IsChecked="{Binding HasTenis, Mode=TwoWay}" Content="¿Tiene pista de padel?" HorizontalAlignment="Left" Margin="56,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbReuniones" IsChecked="{Binding HasMeetings, Mode=TwoWay}" Content="¿Tiene zona de reuniones?" HorizontalAlignment="Left" Margin="245,206,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbDuchas" IsChecked="{Binding HasShower, Mode=TwoWay}" Content="¿Tiene duchas comunitarias?" HorizontalAlignment="Left" Margin="245,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cdInfantil" IsChecked="{Binding HasPlayground, Mode=TwoWay}" Content="¿Tiene parque infantil?" HorizontalAlignment="Left" Margin="245,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <CheckBox x:Name="cbGateKeeper"  IsChecked="{Binding HasGateKeeper, Mode=TwoWay}" Content="¿El portero de la comunidad tiene un apartamento?" HorizontalAlignment="Left" Margin="245,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
+        <DatePicker x:Name="dtpDate" SelectedDate="{Binding Date, Mode=TwoWay}" HorizontalAlignment="Left" Margin="180,163,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
