@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -200,6 +201,38 @@ namespace Csharp_GestorComunidades.ModelView
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        }
+
+        public void LoadNBH()
+        {
+            String SQL = $"SELECT * FROM comunidad.comunidad;";
+            DataTable dt = MySQLDataComponent.LoadData(SQL, cnstr);
+
+            // Limpia la colección actual
+            ListNBH.Clear();
+
+            foreach (DataRow i in dt.Rows)
+            {
+                ListNBH.Add(new Comunidad
+                {
+                    NameNeighborhood = i[1].ToString(),
+                    Address = i[2].ToString(),
+                    Date = DateTime.Parse(i[3].ToString()),
+                    NumPortales = int.Parse(i[4].ToString()),
+                    MetrosCuadrados = int.Parse(i[5].ToString()),
+                    HasPool = bool.TryParse(i[6].ToString(), out bool hasPool) ? hasPool : false,
+                    HasGateKeeper = bool.TryParse(i[7].ToString(), out bool hasGateKeeper) ? hasGateKeeper : false,
+                    HasShower = bool.TryParse(i[8].ToString(), out bool hasShower) ? hasShower : false,
+                    HasPlayground = bool.TryParse(i[9].ToString(), out bool hasPlayground) ? hasPlayground : false,
+                    HasGym = bool.TryParse(i[10].ToString(), out bool hasGym) ? hasGym : false,
+                    HasMeetings = bool.TryParse(i[11].ToString(), out bool hasMeetings) ? hasMeetings : false,
+                    HasTenis = bool.TryParse(i[12].ToString(), out bool hasTenis) ? hasTenis : false,
+                    HasPadel = bool.TryParse(i[13].ToString(), out bool hasPadel) ? hasPadel : false,
+                });
+            }
+
+
+            dt.Dispose();
         }
         #endregion
 

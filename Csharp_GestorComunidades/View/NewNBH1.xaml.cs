@@ -22,43 +22,51 @@ namespace Csharp_GestorComunidades
     public partial class NewNBH1 : Window
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();
-        private string _nameNeigh, _address;
-        private DateTime _date;
 
-        private int _metrosCuadrados, _numPortales;
-        private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
+        private bool alreadyExist = false;
 
-        private List<Portal> _listaPortales;
         public NewNBH1()
         {
             InitializeComponent();
             DataContext = modelNBH;
+            modelNBH.LoadNBH();
         }
 
         private void addNeighborhood(object sender, RoutedEventArgs e)
         {
 
-            Comunidad newNBH = new Comunidad
+            if (modelNBH.ListNBH.Where(x => x.NameNeighborhood == modelNBH.NameNeighborhood).FirstOrDefault() == null)
             {
-                NameNeighborhood = modelNBH.NameNeighborhood,
-                NumPortales = modelNBH.NumPortales,
-                Address = modelNBH.Address,
-                Date = modelNBH.Date,
-                MetrosCuadrados = modelNBH.MetrosCuadrados,
-                HasPool = modelNBH.HasPool,
-                HasPadel = modelNBH.HasPadel,
-                HasTenis = modelNBH.HasTenis,
-                HasGym = modelNBH.HasGym,
-                HasPlayground = modelNBH.HasPlayground,
-                HasGateKeeper = modelNBH.HasGateKeeper,
-                HasShower = modelNBH.HasShower,
-                ListaPortales = modelNBH.ListaPortales
-            };
-           
-            
-            modelNBH.ListNBH.Add(newNBH);
-            modelNBH.newNeighborhood();
+                Comunidad newNBH = new Comunidad
+                {
+                    NameNeighborhood = modelNBH.NameNeighborhood,
+                    NumPortales = modelNBH.NumPortales,
+                    Address = modelNBH.Address,
+                    Date = modelNBH.Date,
+                    MetrosCuadrados = modelNBH.MetrosCuadrados,
+                    HasPool = modelNBH.HasPool,
+                    HasPadel = modelNBH.HasPadel,
+                    HasTenis = modelNBH.HasTenis,
+                    HasGym = modelNBH.HasGym,
+                    HasPlayground = modelNBH.HasPlayground,
+                    HasGateKeeper = modelNBH.HasGateKeeper,
+                    HasShower = modelNBH.HasShower,
+                    ListaPortales = modelNBH.ListaPortales
+                };
                 
+                modelNBH.ListNBH.Add(newNBH);
+                modelNBH.newNeighborhood();
+                //Abrir nueva ventana
+
+            }
+            else
+            {
+                MessageBox.Show("Ya existe una Comunidad con ese nombre");
+            }
+
+
+
+
 
         }
     }
