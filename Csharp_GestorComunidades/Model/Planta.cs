@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_GestorComunidades.Clases
 {
-    class Planta
+    public class Planta
     {
         #region ATRIBUTOS
         private int _numPlanta;

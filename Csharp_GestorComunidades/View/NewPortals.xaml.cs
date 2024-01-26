@@ -24,22 +24,40 @@ namespace Csharp_GestorComunidades.View
         private ComunidadModelView modelNBH = new ComunidadModelView();
         private PortalModelView modelPortal = new PortalModelView();
         string nbhName = "";
-        int IDNBH;
-        public NewPortals(string nameNBH)
+        int IDNBH,numPortals;
+        public NewPortals(Comunidad nbh)
         {
             InitializeComponent();
             DataContext = modelNBH;
             modelNBH.LoadNBH();
-            nbhName = nameNBH;
+
+            nbhName = nbh.NameNeighborhood;
+            numPortals = nbh.NumPortales;
+            generateTabItems(numPortals);
+
             txtNBHName.Content = nbhName;
             IDNBH = modelNBH.getIDNBH(nbhName);
-            //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
+            MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
         }
 
         private void addPortals(object sender, RoutedEventArgs e)
         {
             
 
+        }
+
+        //Generate tabItems for the number of portals (each portal have differente stairs)
+        private void generateTabItems(int numPortals)
+        {
+            for (int i = 1; i <= numPortals; i++)
+            {
+                
+                TabItem newTabItem = new TabItem();
+                newTabItem.Header = $"Portal nº {i}";
+
+                
+                tbControlPortals.Items.Add(newTabItem);
+            }
         }
     }
 }

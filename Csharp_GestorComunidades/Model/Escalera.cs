@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_GestorComunidades.Clases
 {
-    class Escalera
+    public class Escalera
     {
         #region ATRIBUTOS
         private int _numEscalera;

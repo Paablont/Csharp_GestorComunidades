@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="NewPortals" Height="450" Width="800">
     <Grid>
-        <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="39,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="213" FontWeight="Bold"/>
-        <Label x:Name="txtNumPortals" Content="Elige un número de portal" HorizontalAlignment="Left" Margin="58,89,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="674*"/>
+            <ColumnDefinition Width="127*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="39,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="643" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Label x:Name="txtNumPortals" Content="Elige un número de portal y añadele las escaleras que necesite" HorizontalAlignment="Left" Margin="187,73,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TabControl x:Name="tbControlPortals" Margin="36,128,36,70" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

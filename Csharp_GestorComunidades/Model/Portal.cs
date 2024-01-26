@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_GestorComunidades.Clases
 {
-    class Portal
+    public class Portal
     {
         #region ATRIBUTOS
         public event PropertyChangedEventHandler? PropertyChanged;

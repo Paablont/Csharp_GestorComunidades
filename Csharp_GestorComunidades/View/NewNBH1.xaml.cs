@@ -75,10 +75,12 @@ namespace Csharp_GestorComunidades
 
                     modelNBH.ListNBH.Add(newNBH);
                     modelNBH.newNeighborhood();
-                    NewPortals windowPortal = new NewPortals(newNBH.NameNeighborhood);
+
+                    //Generate an object of the new Window (NewPortals.xaml) and show it
+                    NewPortals windowPortal = new NewPortals(newNBH);                    
+                    windowPortal.Show();  
                     
-                    windowPortal.Show();                                       
-                    //MessageBox.Show($"El id de la comunidad {newNBH.NameNeighborhood} es {idComunidad}");
+                    //Hide the actual window (NewNBH1.xaml)
                     this.Hide();
 
                 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_GestorComunidades.Clases
 {
-    class Piso
+    public class Piso
     {
         #region ATRIBUTOS
         private char _letraPiso;

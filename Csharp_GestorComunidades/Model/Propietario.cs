@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_GestorComunidades.Clases
 {
-    class Propietario
+    public class Propietario
     {
         
     }
