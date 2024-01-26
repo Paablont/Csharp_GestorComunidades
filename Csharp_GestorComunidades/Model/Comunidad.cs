@@ -18,7 +18,7 @@ namespace Csharp_GestorComunidades.Clases
         private string _nameNeigh, _address;
         private DateTime _date;
 
-        private int _metrosCuadrados,_numPortales;
+        private int _surface,_numPortales;
         private bool _hasPool, _hasPadel, _hasTenis, _hasMeetings, _hasGym, _hasPlayground, _hasGatekeeper, _hasShower;
 
         private List<Portal> _listaPortales;
@@ -79,13 +79,13 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public int MetrosCuadrados
+        public int Surface
         {
-            get { return _metrosCuadrados; }
+            get { return _surface; }
             set
             {
-                _metrosCuadrados = value;
-                OnPropertyChange(nameof(MetrosCuadrados));
+                _surface = value;
+                OnPropertyChange(nameof(Surface));
             }
         }
 

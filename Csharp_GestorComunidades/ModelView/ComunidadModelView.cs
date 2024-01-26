@@ -21,7 +21,7 @@ namespace Csharp_GestorComunidades.ModelView
         private string _nameNeigh = "", _address= "";
         private DateTime _date;
 
-        private int _metrosCuadrados=0,_numPortales=0;
+        private int _surface=0,_numPortales=0;
         private bool _hasPool=false, _hasPadel = false, _hasTenis = false, _hasMeetings = false, _hasGym, _hasPlayground = false, _hasGatekeeper = false, _hasShower = false;
 
         private List<Portal> _listaPortales;
@@ -81,13 +81,13 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
-        public int MetrosCuadrados
+        public int Surface
         {
-            get { return _metrosCuadrados; }
+            get { return _surface; }
             set
             {
-                _metrosCuadrados = value;
-                OnPropertyChange(nameof(MetrosCuadrados));
+                _surface = value;
+                OnPropertyChange(nameof(Surface));
             }
         }
 
@@ -197,7 +197,7 @@ namespace Csharp_GestorComunidades.ModelView
         {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO comunidad (nombre,direccion,fecha,numPortales,metroscuadrados,piscina,tienePortero,tieneZonaDuchas,tieneZonaInfantil,tieneZonaDeporte,tieneZonaReuniones,tieneTenis,tienePadel)" +
-                $" VALUES ('{NameNeighborhood}','{Address}', '{Date.ToString("yyyy-MM-dd")}', '{NumPortales}', '{MetrosCuadrados}', '{(HasPool? 1 : 0)}', '{(HasGateKeeper ? 1 : 0)}', '{(HasShower ? 1 : 0)}', '{(HasPlayground ? 1 : 0)}', '{(HasGym ? 1 : 0)}', '{(HasMeetings ? 1 : 0)}', '{(HasTenis ? 1 : 0)}', '{(HasPadel ? 1 : 0)}');";
+                $" VALUES ('{NameNeighborhood}','{Address}', '{Date.ToString("yyyy-MM-dd")}', '{NumPortales}', '{Surface}', '{(HasPool? 1 : 0)}', '{(HasGateKeeper ? 1 : 0)}', '{(HasShower ? 1 : 0)}', '{(HasPlayground ? 1 : 0)}', '{(HasGym ? 1 : 0)}', '{(HasMeetings ? 1 : 0)}', '{(HasTenis ? 1 : 0)}', '{(HasPadel ? 1 : 0)}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
@@ -219,7 +219,7 @@ namespace Csharp_GestorComunidades.ModelView
                     Address = i[2].ToString(),
                     Date = DateTime.Parse(i[3].ToString()),
                     NumPortales = int.Parse(i[4].ToString()),
-                    MetrosCuadrados = int.Parse(i[5].ToString()),
+                    Surface = int.Parse(i[5].ToString()),
                     HasPool = bool.TryParse(i[6].ToString(), out bool hasPool) ? hasPool : false,
                     HasGateKeeper = bool.TryParse(i[7].ToString(), out bool hasGateKeeper) ? hasGateKeeper : false,
                     HasShower = bool.TryParse(i[8].ToString(), out bool hasShower) ? hasShower : false,

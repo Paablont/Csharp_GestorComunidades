@@ -15,7 +15,7 @@
         <Label x:Name="txtAddress_Copiar" Content="Fecha de creación" HorizontalAlignment="Left" Margin="49,161,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtMetros" Content="Superficie de la comunidad (m2)" HorizontalAlignment="Left" Margin="368,128,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtNumPortales" Content="Define el número de portales" HorizontalAlignment="Left" Margin="368,88,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbMetros" Text="{Binding MetrosCuadrados, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbMetros" Text="{Binding Surface, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnNext"  Content="Siguiente" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="addNeighborhood"/>
         <TextBox x:Name="tbNumPortales" Text="{Binding NumPortales, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <CheckBox x:Name="cbPiscina" IsChecked="{Binding HasPool, Mode=TwoWay}" Content="¿Tiene piscina?" HorizontalAlignment="Left" Margin="57,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>

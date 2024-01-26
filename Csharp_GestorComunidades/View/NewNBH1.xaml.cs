@@ -24,7 +24,7 @@ namespace Csharp_GestorComunidades
         private ComunidadModelView modelNBH = new ComunidadModelView();
 
         private bool alreadyExist = false;
-
+        private int numPortales, surface;
         public NewNBH1()
         {
             InitializeComponent();
@@ -32,41 +32,57 @@ namespace Csharp_GestorComunidades
             modelNBH.LoadNBH();
         }
 
+        /*
+         *******************************************************************
+         *              FIRST WINDOW. CREATE NEW NEIGHBORHOOD
+         *******************************************************************              
+         */
         private void addNeighborhood(object sender, RoutedEventArgs e)
         {
-
+            numPortales = modelNBH.NumPortales;
+            surface = modelNBH.Surface;
             if (modelNBH.ListNBH.Where(x => x.NameNeighborhood == modelNBH.NameNeighborhood).FirstOrDefault() == null)
             {
-                Comunidad newNBH = new Comunidad
+                if (modelNBH.NameNeighborhood.Equals("") || modelNBH.Address.Equals("") || modelNBH.Surface.Equals("") || modelNBH.NumPortales.Equals(""))
                 {
-                    NameNeighborhood = modelNBH.NameNeighborhood,
-                    NumPortales = modelNBH.NumPortales,
-                    Address = modelNBH.Address,
-                    Date = modelNBH.Date,
-                    MetrosCuadrados = modelNBH.MetrosCuadrados,
-                    HasPool = modelNBH.HasPool,
-                    HasPadel = modelNBH.HasPadel,
-                    HasTenis = modelNBH.HasTenis,
-                    HasGym = modelNBH.HasGym,
-                    HasPlayground = modelNBH.HasPlayground,
-                    HasGateKeeper = modelNBH.HasGateKeeper,
-                    HasShower = modelNBH.HasShower,
-                    ListaPortales = modelNBH.ListaPortales
-                };
-                
-                modelNBH.ListNBH.Add(newNBH);
-                modelNBH.newNeighborhood();
-                //Abrir nueva ventana
+                    MessageBox.Show("Error. Hay campos sin rellenar");
+                }else if (surface <= 0)
+                {
+                    MessageBox.Show("La superficie de la comunidad no puede ser 0 o números negativos");
+                }else if(numPortales <= 0)
+                {
+                    MessageBox.Show("El número de portales de la comunidad no puede ser 0 o números negativos");
+                }
+                else
+                {
+                    Comunidad newNBH = new Comunidad
+                    {
+                        NameNeighborhood = modelNBH.NameNeighborhood,
+                        NumPortales = modelNBH.NumPortales,
+                        Address = modelNBH.Address,
+                        Date = modelNBH.Date,
+                        Surface = modelNBH.Surface,
+                        HasPool = modelNBH.HasPool,
+                        HasPadel = modelNBH.HasPadel,
+                        HasTenis = modelNBH.HasTenis,
+                        HasGym = modelNBH.HasGym,
+                        HasPlayground = modelNBH.HasPlayground,
+                        HasGateKeeper = modelNBH.HasGateKeeper,
+                        HasShower = modelNBH.HasShower,
+                        ListaPortales = modelNBH.ListaPortales
+                    };
+
+                    modelNBH.ListNBH.Add(newNBH);
+                    modelNBH.newNeighborhood();
+                    //Abrir nueva ventana
+                }
+
 
             }
             else
             {
                 MessageBox.Show("Ya existe una Comunidad con ese nombre");
             }
-
-
-
-
 
         }
     }
