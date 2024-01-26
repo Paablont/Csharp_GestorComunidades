@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 
 namespace Csharp_GestorComunidades.ModelView
@@ -24,7 +25,7 @@ namespace Csharp_GestorComunidades.ModelView
         private int _surface=0,_numPortales=0;
         private bool _hasPool=false, _hasPadel = false, _hasTenis = false, _hasMeetings = false, _hasGym, _hasPlayground = false, _hasGatekeeper = false, _hasShower = false;
 
-        private List<Portal> _listaPortales;
+        private List<Portal> _listPortals;
         // Método que se encarga de actualizar las propiedades en cada cambio
         private void OnPropertyChange(string propertyName)
         {
@@ -169,13 +170,13 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
-        public List<Portal> ListaPortales
+        public List<Portal> ListPortals
         {
-            get { return _listaPortales; }
+            get { return _listPortals; }
             set
             {
-                _listaPortales = value;
-                OnPropertyChange(nameof(ListaPortales));
+                _listPortals = value;
+                OnPropertyChange(nameof(ListPortals));
             }
         }
 
@@ -202,6 +203,35 @@ namespace Csharp_GestorComunidades.ModelView
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
+
+        
+        public int getIDNBH(String nameNBH)
+        {
+            int idNBH = 0;
+
+            try
+            {
+                String SQL = $"SELECT idcomunidad FROM comunidad.comunidad WHERE nombre = '{nameNBH}'";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    idNBH = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID de la comunidad: {ex.Message}");
+            }
+
+            return idNBH;
+        }
+
 
         public void LoadNBH()
         {

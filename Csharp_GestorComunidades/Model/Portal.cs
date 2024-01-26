@@ -11,7 +11,7 @@ namespace Csharp_GestorComunidades.Clases
     {
         #region ATRIBUTOS
         public event PropertyChangedEventHandler? PropertyChanged;
-        private int _numPortal;
+        private int _numPortal,_IDNBH,_numStairs;
         private List<Escalera> _listaEscalera;
         private Comunidad _numComunidad;
 
@@ -21,13 +21,14 @@ namespace Csharp_GestorComunidades.Clases
         }
         #endregion
 
-        #region CONSTRUCT,GET,SET
-        public Portal(int numPortal, List<Escalera> listaEscalera, Comunidad numComunidad)
+        #region CONSTRUCT
+        public Portal()
         {
-            _numPortal = numPortal;
-            _listaEscalera = listaEscalera;
-            this._numComunidad = numComunidad;
+            
         }
+        #endregion
+
+        #region GET,SET
 
         public int NumPortal
         {
@@ -49,13 +50,23 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public Comunidad NumComunidad
+        public int IDNBH
         {
-            get { return _numComunidad; }
+            get { return _IDNBH; }
             set
             {
-                _numComunidad = value;
-                OnPropertyChange(nameof(NumComunidad));
+                _IDNBH = value;
+                OnPropertyChange(nameof(IDNBH));
+            }
+        }
+
+        public int NumStairs
+        {
+            get { return _numStairs; }
+            set
+            {
+                _numStairs = value;
+                OnPropertyChange(nameof(NumStairs));
             }
         }
         #endregion

@@ -36,5 +36,17 @@ namespace Csharp_GestorComunidades.DDBB
             }
             return dt;
         }
+
+        public static object ExecuteScalar(String SQL, String cnstr)
+        {
+            using (MySqlConnection con = new MySqlConnection(cnstr))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(SQL, con))
+                {
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }

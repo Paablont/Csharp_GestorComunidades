@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Csharp_GestorComunidades.Clases;
+using Csharp_GestorComunidades.ModelView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,25 @@ namespace Csharp_GestorComunidades.View
     /// </summary>
     public partial class NewPortals : Window
     {
-        public NewPortals()
+        private ComunidadModelView modelNBH = new ComunidadModelView();
+        private PortalModelView modelPortal = new PortalModelView();
+        string nbhName = "";
+        int IDNBH;
+        public NewPortals(string nameNBH)
         {
             InitializeComponent();
+            DataContext = modelNBH;
+            modelNBH.LoadNBH();
+            nbhName = nameNBH;
+            txtNBHName.Content = nbhName;
+            IDNBH = modelNBH.getIDNBH(nbhName);
+            //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
+        }
+
+        private void addPortals(object sender, RoutedEventArgs e)
+        {
+            
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Csharp_GestorComunidades.Clases;
 using Csharp_GestorComunidades.ModelView;
+using Csharp_GestorComunidades.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,12 +70,17 @@ namespace Csharp_GestorComunidades
                         HasPlayground = modelNBH.HasPlayground,
                         HasGateKeeper = modelNBH.HasGateKeeper,
                         HasShower = modelNBH.HasShower,
-                        ListaPortales = modelNBH.ListaPortales
+                        ListaPortales = modelNBH.ListPortals
                     };
 
                     modelNBH.ListNBH.Add(newNBH);
                     modelNBH.newNeighborhood();
-                    //Abrir nueva ventana
+                    NewPortals windowPortal = new NewPortals(newNBH.NameNeighborhood);
+                    
+                    windowPortal.Show();                                       
+                    //MessageBox.Show($"El id de la comunidad {newNBH.NameNeighborhood} es {idComunidad}");
+                    this.Hide();
+
                 }
 
 
@@ -85,5 +91,8 @@ namespace Csharp_GestorComunidades
             }
 
         }
+
+       
+        
     }
 }
