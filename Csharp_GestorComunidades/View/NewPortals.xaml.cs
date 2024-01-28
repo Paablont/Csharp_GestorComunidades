@@ -74,8 +74,25 @@ namespace Csharp_GestorComunidades.View
 
         private void addPortals(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Portales añadidos. Recuerda que cada portal debe tener minimo 1 escalera");
-
+            bool emptyStairs = false;
+           
+            for(int i= 0;i< modelPortal.ListPortals.Count;i++)
+            {
+                if (modelPortal.ListPortals[i].NumStairs == 0)
+                {
+                    emptyStairs = true;
+                }
+            }
+            if(emptyStairs)
+            {
+                MessageBox.Show("Error al añadir portales a la comunidad. Todos los portales deben tener como mínimo una escalera");
+            }
+            else
+            {
+                MessageBox.Show("Portales añadidos");
+                
+                this.Hide();
+            }
         }
 
         private void addStairs(object sender, RoutedEventArgs e)
@@ -86,16 +103,17 @@ namespace Csharp_GestorComunidades.View
 
             //To make sure in which portal are we add stairs
 
-            int actualNumStairs = 0;
+            int actualNumStairs;
             if (activeTab != null)
             {
                 int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
+
                 //Get the actual numStairs the Portal has
                 actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
                 actualNumStairs++;
                 modelPortal.NumStairs = actualNumStairs;
                 modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
-
+                modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs; 
                 MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. Escaleras actuales: {modelPortal.NumStairs}");
             }
 

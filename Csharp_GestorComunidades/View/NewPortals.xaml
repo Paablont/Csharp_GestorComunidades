@@ -14,12 +14,10 @@
         <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="39,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="643" FontWeight="Bold" Grid.ColumnSpan="2"/>
         <Label x:Name="txtNumPortals" Content="Elige un número de portal y añadele las escaleras que necesite" HorizontalAlignment="Left" Margin="187,73,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TabControl x:Name="tbControlPortals" Margin="10,109,72,10">
-            
+
         </TabControl>
         <Button x:Name="btnAddPortals" Content="Añadir portales" HorizontalAlignment="Left" Margin="624,355,0,0" VerticalAlignment="Top" Height="45" Width="140" FontSize="14" Click="addPortals" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnAddStairs" Content="Añadir Escalera" HorizontalAlignment="Left" Margin="624,288,0,0" VerticalAlignment="Top" Height="46" Width="140" FontSize="14" Click="addStairs" Grid.ColumnSpan="2" />
-        <TextBox x:Name="tboxNumStair" HorizontalAlignment="Left" Margin="634,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Grid.ColumnSpan="2" Height="30" FontSize="16"/>
-        <TextBox x:Name="tboxNumPlantas" HorizontalAlignment="Left" Margin="634,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="130" Grid.ColumnSpan="2" Height="30" FontSize="16"/>
+        <Button x:Name="btnAddStairs" Content="Añadir Escalera" HorizontalAlignment="Left" Margin="624,136,0,0" VerticalAlignment="Top" Height="46" Width="140" FontSize="14" Click="addStairs" Grid.ColumnSpan="2" />
 
 
 
