@@ -16,48 +16,108 @@ using System.Windows.Shapes;
 
 namespace Csharp_GestorComunidades.View
 {
-    /// <summary>
-    /// Lógica de interacción para NewPortals.xaml
-    /// </summary>
+   
     public partial class NewPortals : Window
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();
-        private PortalModelView modelPortal = new PortalModelView();
-        string nbhName = "";
-        int IDNBH,numPortals;
+        private PortalModelView modelPortal = new PortalModelView();        
+        int numPortals;
+        Comunidad neighb;
         public NewPortals(Comunidad nbh)
         {
             InitializeComponent();
             DataContext = modelNBH;
-            modelNBH.LoadNBH();
+            modelNBH.LoadNBH();            
+            neighb = nbh;                 
 
-            nbhName = nbh.NameNeighborhood;
-            numPortals = nbh.NumPortales;
-            generateTabItems(numPortals);
+            //Generate tabItems  = numPortals created in 1st window
+            generateTabItems(nbh);
 
-            txtNBHName.Content = nbhName;
-            IDNBH = modelNBH.getIDNBH(nbhName);
-            MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
-        }
+            //Obtain ID from actual neighborhood
+            modelPortal.IDNBH = modelNBH.getIDNBH(nbh.NameNeighborhood);
+            
+            ////TEST: Para comprobar que el id de la comunidad lo coge bien
+            //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
 
-        private void addPortals(object sender, RoutedEventArgs e)
-        {
+            //Add portals to nbh listPortales
+            neighb.ListaPortales = new List<Portal>();
+            for (int i = 0; i < nbh.NumPortales; i++)
+            {
+                modelPortal.NumPortal = (i + 1);
+                Portal p = new Portal
+                {
+                    NumPortal = modelPortal.NumPortal,
+                    NumStairs = 0,
+                    IDNBH = modelPortal.IDNBH,                                       
+                    ListaEscaleras = modelPortal.ListStairs                   
+                };
+                modelPortal.ListPortals.Add(p);
+                modelPortal.newPortal();
+                neighb.ListaPortales.Add(p);
+            }
+
+            for(int i=0;i < modelPortal.ListPortals.Count; i++)
+            {
+                MessageBox.Show(modelPortal.ListPortals[i].ToString());
+            }
+
+            //TEST: Para comprobar que la lista tiene los portales segun el numero 
+            //int port = 0;
+            //for (int i = 0; i < nbh.ListaPortales.Count; i++)
+            //{
+            //    MessageBox.Show($"Portal num {(i + 1)} : IDNBH -> {nbh.ListaPortales[i].IDNBH} , ");
+            //}
             
 
         }
 
-        //Generate tabItems for the number of portals (each portal have differente stairs)
-        private void generateTabItems(int numPortals)
+        private void addPortals(object sender, RoutedEventArgs e)
         {
-            for (int i = 1; i <= numPortals; i++)
+            MessageBox.Show("Portales añadidos. Recuerda que cada portal debe tener minimo 1 escalera");
+
+        }
+
+        private void addStairs(object sender, RoutedEventArgs e)
+        {
+            // Obtener el DataGrid activo
+            TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
+            DataGrid activeDataGrid = activeTab?.Content as DataGrid;
+
+            if (activeDataGrid != null)
             {
-                
+                // Añadir la escalera al DataGrid
+                Escalera nuevaEscalera = new Escalera();
+                // Aquí puedes configurar la nueva escalera según tus necesidades
+
+                // Agregar la nueva escalera al DataGrid
+                activeDataGrid.Items.Add(nuevaEscalera);
+
+            }
+        }
+
+
+        //Generate tabItems for the number of portals (each portal can have differente stairs)
+        private void generateTabItems(Comunidad nbh)
+        {
+            for (int i = 1; i <= nbh.NumPortales; i++)
+            {
                 TabItem newTabItem = new TabItem();
                 newTabItem.Header = $"Portal nº {i}";
-
                 
+                // Crear un nuevo DataGrid
+                DataGrid newDataGrid = new DataGrid();
+                // Configurar el DataGrid según tus necesidades
+                // Por ejemplo, puedes asignar la ItemsSource, definir columnas, etc.
+
+                // Agregar el DataGrid al contenido del TabItem
+                newTabItem.Content = newDataGrid;
+
+                // Agregar el nuevo TabItem al TabControl
                 tbControlPortals.Items.Add(newTabItem);
             }
         }
+
+
+        
     }
 }

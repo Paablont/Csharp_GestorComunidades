@@ -22,13 +22,13 @@ namespace Csharp_GestorComunidades.Clases
 
         #endregion
 
-        #region CONSTRUCT,GET,SET
-        public Escalera(int numEscalera, List<Planta> listaPlantas, Portal numPortal)
+        #region CONSTRUCT
+        public Escalera()
         {
-            _numEscalera = numEscalera;
-            _listaPlantas = listaPlantas;
-            this._numPortal = numPortal;
+            
         }
+        #endregion
+        #region GET,SET
 
         public int NumEscalera
         {

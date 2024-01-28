@@ -90,18 +90,29 @@ namespace Csharp_GestorComunidades.ModelView
 
         #region SQL
 
-        public void newNeighborhood()
+        public void newPortal()
         {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
-            String SQL = $"INSERT INTO portal (numEscaleras, idComunidad)" +
-             $" VALUES ('{NumStairs}', '{IDNBH}');";
+            String SQL = $"INSERT INTO portal (numPortal,numEscaleras, idComunidad)" +
+                         $" VALUES ('{NumPortal}','{NumStairs}', '{IDNBH}');";
 
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
 
-        
+        public void updatePortalStairs(int numePortal ,int newNumStairs)
+        {
+            // Sentencia SQL para actualizar el número de escaleras en un portal específico
+            String SQL = $"UPDATE portal SET numEscaleras = '{newNumStairs}' WHERE numPortal = '{numePortal}';";
+
+            // Usamos las clases de la librería de MySQL para ejecutar la consulta
+            // Asegúrate de manejar excepciones y errores en entornos de producción
+            MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        }
+
+
+
         #endregion
     }
 }
