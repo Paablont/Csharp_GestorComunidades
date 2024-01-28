@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Csharp_GestorComunidades.ModelView
 {
@@ -88,6 +89,8 @@ namespace Csharp_GestorComunidades.ModelView
         }
         #endregion
 
+       
+
         #region SQL
 
         public void newPortal()
@@ -101,15 +104,44 @@ namespace Csharp_GestorComunidades.ModelView
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
 
-        public void updatePortalStairs(int numePortal ,int newNumStairs)
+        public void updatePortalStairs(int numPortal, int newNumStairs, int IDnb)
         {
             // Sentencia SQL para actualizar el número de escaleras en un portal específico
-            String SQL = $"UPDATE portal SET numEscaleras = '{newNumStairs}' WHERE numPortal = '{numePortal}';";
+            // Se actualizará tanto por el número de portal como por el idComunidad
+            String SQL = $"UPDATE portal SET numEscaleras = '{newNumStairs}' WHERE numPortal = '{numPortal}' AND idComunidad = '{IDnb}';";
 
             // Usamos las clases de la librería de MySQL para ejecutar la consulta
             // Asegúrate de manejar excepciones y errores en entornos de producción
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
+
+        public int getNumStairs(int numPortal,int IDnb)
+        {
+            int numStairs = 0;
+
+            try
+            {
+                String SQL = $"SELECT numEscaleras FROM portal WHERE numPortal = '{numPortal}' AND idComunidad = '{IDnb}';";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    numStairs = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID de la comunidad: {ex.Message}");
+            }
+
+            return numStairs;
+        }
+
 
 
 

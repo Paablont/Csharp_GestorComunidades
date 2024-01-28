@@ -16,26 +16,26 @@ using System.Windows.Shapes;
 
 namespace Csharp_GestorComunidades.View
 {
-   
+
     public partial class NewPortals : Window
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();
-        private PortalModelView modelPortal = new PortalModelView();        
+        private PortalModelView modelPortal = new PortalModelView();
         int numPortals;
         Comunidad neighb;
         public NewPortals(Comunidad nbh)
         {
             InitializeComponent();
-            DataContext = modelNBH;
-            modelNBH.LoadNBH();            
-            neighb = nbh;                 
+            DataContext = modelPortal;
+            modelNBH.LoadNBH();
+            neighb = nbh;
 
             //Generate tabItems  = numPortals created in 1st window
             generateTabItems(nbh);
 
             //Obtain ID from actual neighborhood
             modelPortal.IDNBH = modelNBH.getIDNBH(nbh.NameNeighborhood);
-            
+
             ////TEST: Para comprobar que el id de la comunidad lo coge bien
             //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
 
@@ -48,18 +48,19 @@ namespace Csharp_GestorComunidades.View
                 {
                     NumPortal = modelPortal.NumPortal,
                     NumStairs = 0,
-                    IDNBH = modelPortal.IDNBH,                                       
-                    ListaEscaleras = modelPortal.ListStairs                   
+                    IDNBH = modelPortal.IDNBH,
+                    ListaEscaleras = modelPortal.ListStairs
                 };
                 modelPortal.ListPortals.Add(p);
                 modelPortal.newPortal();
                 neighb.ListaPortales.Add(p);
             }
 
-            for(int i=0;i < modelPortal.ListPortals.Count; i++)
-            {
-                MessageBox.Show(modelPortal.ListPortals[i].ToString());
-            }
+            ////TEST: Para comprobar cuantos portales se crean
+            //for(int i=0;i < modelPortal.ListPortals.Count; i++)
+            //{
+            //    MessageBox.Show(modelPortal.ListPortals[i].ToString());
+            //}
 
             //TEST: Para comprobar que la lista tiene los portales segun el numero 
             //int port = 0;
@@ -67,7 +68,7 @@ namespace Csharp_GestorComunidades.View
             //{
             //    MessageBox.Show($"Portal num {(i + 1)} : IDNBH -> {nbh.ListaPortales[i].IDNBH} , ");
             //}
-            
+
 
         }
 
@@ -81,18 +82,24 @@ namespace Csharp_GestorComunidades.View
         {
             // Obtener el DataGrid activo
             TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
-            DataGrid activeDataGrid = activeTab?.Content as DataGrid;
+            DataGrid newDataGrid = activeTab?.Content as DataGrid;
 
-            if (activeDataGrid != null)
+            //To make sure in which portal are we add stairs
+
+            int actualNumStairs = 0;
+            if (activeTab != null)
             {
-                // Añadir la escalera al DataGrid
-                Escalera nuevaEscalera = new Escalera();
-                // Aquí puedes configurar la nueva escalera según tus necesidades
+                int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
+                //Get the actual numStairs the Portal has
+                actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
+                actualNumStairs++;
+                modelPortal.NumStairs = actualNumStairs;
+                modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
 
-                // Agregar la nueva escalera al DataGrid
-                activeDataGrid.Items.Add(nuevaEscalera);
-
+                MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. Escaleras actuales: {modelPortal.NumStairs}");
             }
+
+
         }
 
 
@@ -103,7 +110,7 @@ namespace Csharp_GestorComunidades.View
             {
                 TabItem newTabItem = new TabItem();
                 newTabItem.Header = $"Portal nº {i}";
-                
+
                 // Crear un nuevo DataGrid
                 DataGrid newDataGrid = new DataGrid();
                 // Configurar el DataGrid según tus necesidades
@@ -118,6 +125,6 @@ namespace Csharp_GestorComunidades.View
         }
 
 
-        
+
     }
 }
