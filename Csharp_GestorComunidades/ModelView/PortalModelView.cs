@@ -142,6 +142,33 @@ namespace Csharp_GestorComunidades.ModelView
             return numStairs;
         }
 
+        public int getIDPortal(int idNBH, int numPortal)
+        {
+
+            int idPortal = 0;
+            try
+            {
+                String SQL = $"SELECT idportal FROM portal WHERE idComunidad = '{idNBH}' AND numPortal = '{numPortal}'";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    idPortal = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
+            }
+
+            return idPortal;
+        }
+
 
 
 

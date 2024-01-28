@@ -12,7 +12,7 @@ namespace Csharp_GestorComunidades.Clases
         #region ATRIBUTOS
         private int _numEscalera;
         private List<Planta> _listaPlantas;
-        private Portal _numPortal;
+        private int _numPortal;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string propertyName)
@@ -50,7 +50,7 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public Portal NumPortal
+        public int NumPortal
         {
             get { return _numPortal; }
             set
