@@ -41,6 +41,9 @@ namespace Csharp_GestorComunidades.View
             ////TEST: Para comprobar que el id de la comunidad lo coge bien
             //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
 
+
+            //Initialice list of Stairs in Portal
+            modelPortal.ListStairs = new List<Escalera>();
             //Add portals to nbh listPortales
             neighb.ListaPortales = new List<Portal>();
             for (int i = 0; i < nbh.NumPortales; i++)
@@ -131,6 +134,7 @@ namespace Csharp_GestorComunidades.View
 
                 modelStair.NumPortal = modelPortal.getIDPortal(modelPortal.IDNBH,numPortalINDEX);
                 modelStair.NumEscalera = modelPortal.NumStairs;
+                
                 //Add stairs to the DDBB and listOfStairs
                 Escalera newStair = new Escalera
                 {
@@ -142,6 +146,7 @@ namespace Csharp_GestorComunidades.View
 
                 modelStair.ListStairs.Add(newStair);
                 modelStair.newStair();
+                modelPortal.ListStairs.Add(newStair);
                 //modelPortal.ListStairs.Add(newStair);
             }
 
