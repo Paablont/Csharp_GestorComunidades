@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace Csharp_GestorComunidades.ModelView
 {
-    class PortalModelView
+    public class PortalModelView
     {
         #region ATRIBUTOS
         private const String cnstr = "server=localhost;uid=pablo;pwd=pablo;database=comunidad";

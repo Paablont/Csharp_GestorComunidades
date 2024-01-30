@@ -32,6 +32,7 @@ namespace Csharp_GestorComunidades.View
             DataContext = modelPortal;
             modelNBH.LoadNBH();
             neighb = nbh;
+            txtNBHName.Content = neighb.NameNeighborhood;
 
             //Generate tabItems  = numPortals created in 1st window
             generateTabItems(nbh);
@@ -104,7 +105,7 @@ namespace Csharp_GestorComunidades.View
             else
             {
                 MessageBox.Show("Portales añadidos");
-                NewAppartment windowAppart = new NewAppartment(modelPlanta,modelStair);
+                NewAppartment windowAppart = new NewAppartment(modelPlanta, modelStair,modelPortal);
                 windowAppart.Show();
                 this.Hide();
             }

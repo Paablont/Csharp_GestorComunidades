@@ -8,8 +8,12 @@
         Title="NewAppartment" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="51,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="643" FontWeight="Bold"/>
-        <ComboBox x:Name="cbbNumPlantas" HorizontalAlignment="Left" Margin="224,87,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="txtPlanta" Content="Número de planta" HorizontalAlignment="Left" Margin="112,85,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbbNumPlantas" HorizontalAlignment="Left" Margin="222,134,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtPlanta" Content="Número de planta" HorizontalAlignment="Left" Margin="110,132,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbbNumPortal" SelectionChanged="CbbNumPortal_SelectionChanged" HorizontalAlignment="Left" Margin="231,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtPortales" Content="Número de portal" HorizontalAlignment="Left" Margin="110,92,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbbNumEscaleras" SelectionChanged="CbbNumEscaleras_SelectionChanged" HorizontalAlignment="Left" Margin="494,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtEscalera" Content="Número de escalera" HorizontalAlignment="Left" Margin="372,92,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

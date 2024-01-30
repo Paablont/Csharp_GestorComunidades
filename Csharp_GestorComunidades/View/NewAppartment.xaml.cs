@@ -16,32 +16,104 @@ using System.Windows.Shapes;
 
 namespace Csharp_GestorComunidades.View
 {
-    
+
     public partial class NewAppartment : Window
     {
         PlantaModelView modelPlanta;
         EscaleraModelView modelStair;
-        //List for ComboBox 
+        PortalModelView modelPortal;
+
         List<string> numPlanta = new List<string>();
-            
-        
-        public NewAppartment(PlantaModelView plantas,EscaleraModelView escaleras)
+        List<string> numPortales = new List<string>();
+        List<string> numStairs = new List<string>();
+
+        public NewAppartment(PlantaModelView plantas, EscaleraModelView escaleras, PortalModelView portales)
         {
-            
             InitializeComponent();
             modelPlanta = plantas;
             modelStair = escaleras;
+            modelPortal = portales;
             DataContext = modelPlanta;
 
-            //Initialice num ComboBox plantas
-            for (int i = 1; i <= modelPlanta.ListPlanta.Count; i++)
+            // Inicializar num ComboBox portales
+            for (int i = 0; i < modelPortal.ListPortals.Count; i++)
             {
-                numPlanta.Add($"Escalera {modelStair.NumEscalera}, Planta {i}");
+                numPortales.Add($"Portal {(i + 1)}");
             }
 
-            // Establecer la lista como origen de datos para el ComboBox
-            cbbNumPlantas.ItemsSource = numPlanta;
+            // Inicializar num ComboBox escaleras
+            for (int i = 0; i < modelStair.ListStairs.Count; i++)
+            {
+                numStairs.Add($"Escalera {(i + 1)}");
+            }
 
+            // Inicializar num ComboBox plantas
+            for (int i = 0; i < modelPlanta.ListPlanta.Count; i++)
+            {
+                numPlanta.Add($"Planta {(i + 1)}");
+            }
+
+            // Establecer numPortal en ComboBox
+            cbbNumPortal.ItemsSource = numPortales;
+
+            // Manejar evento de selección de cbbNumPortal
+            cbbNumPortal.SelectionChanged += CbbNumPortal_SelectionChanged;
+            // Manejar evento de selección de cbbNumEscaleras
+            cbbNumEscaleras.SelectionChanged += CbbNumEscaleras_SelectionChanged;
         }
+
+        private void CbbNumPortal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Verificar si hay elementos seleccionados en cbbNumPortal
+            if (cbbNumPortal.SelectedIndex >= 0 && cbbNumPortal.SelectedIndex < numPortales.Count)
+            {
+                // Actualizar la lista de escaleras según el portal seleccionado
+                int selectedIndex = cbbNumPortal.SelectedIndex;
+
+                // Verificar si el índice es válido para la lista de escaleras
+                if (selectedIndex >= 0 && selectedIndex < modelPortal.ListPortals.Count)
+                {
+                    numStairs.Clear();
+                    for (int i = 0; i < modelPortal.ListPortals[selectedIndex].NumStairs; i++)
+                    {
+                        numStairs.Add($"Escalera {(i + 1)}");
+                    }
+
+                    // Actualizar el ComboBox de escaleras
+                    cbbNumEscaleras.ItemsSource = null;
+                    cbbNumEscaleras.ItemsSource = numStairs;
+
+                    // También puedes actualizar el ComboBox de plantas aquí según la escalera seleccionada
+                    // Por ejemplo, puedes llamar a CbbNumEscaleras_SelectionChanged para actualizar las plantas
+                    CbbNumEscaleras_SelectionChanged(null, null);
+                }
+            }
+        }
+
+        private void CbbNumEscaleras_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Verificar si hay elementos seleccionados en cbbNumEscaleras
+            if (cbbNumEscaleras.SelectedIndex >= 0 && cbbNumEscaleras.SelectedIndex < numStairs.Count)
+            {
+                // Actualizar la lista de plantas según la escalera seleccionada
+                int selectedIndex = cbbNumEscaleras.SelectedIndex;
+
+                // Verificar si el índice es válido para la lista de plantas
+                if (selectedIndex >= 0 && selectedIndex < modelStair.ListStairs.Count)
+                {
+                    numPlanta.Clear();
+                    for (int i = 0; i < modelStair.ListStairs[selectedIndex].ListaPlantas.Count; i++)
+                    {
+                        numPlanta.Add($"Planta {(i + 1)}");
+                    }
+
+                    // Actualizar el ComboBox de plantas
+                    cbbNumPlantas.ItemsSource = null;
+                    cbbNumPlantas.ItemsSource = numPlanta;
+                }
+            }
+        }
+
     }
+
 }
