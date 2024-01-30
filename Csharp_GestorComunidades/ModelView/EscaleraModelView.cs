@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Csharp_GestorComunidades.ModelView
 {
-    internal class EscaleraModelView
+    public class EscaleraModelView
     {
         #region ATRIBUTOS
         private const String cnstr = "server=localhost;uid=pablo;pwd=pablo;database=comunidad";
@@ -91,6 +91,33 @@ namespace Csharp_GestorComunidades.ModelView
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        }
+
+        public int getIDStair(int idPortal, int numEscalera)
+        {
+
+            int idStair = 0;
+            try
+            {
+                String SQL = $"SELECT idescalera FROM escalera WHERE idPortal = '{idPortal}' AND numEscalera = '{numEscalera}'";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    idStair = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
+            }
+
+            return idStair;
         }
         #endregion
     }

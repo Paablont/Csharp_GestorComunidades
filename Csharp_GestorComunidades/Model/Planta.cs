@@ -11,7 +11,7 @@ namespace Csharp_GestorComunidades.Clases
     {
         #region ATRIBUTOS
         private int _numPlanta;
-        private Escalera _numEscalera;
+        private int _numEscalera;
         private List<Piso> _listaPiso;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -22,11 +22,9 @@ namespace Csharp_GestorComunidades.Clases
 
         #endregion
         #region CONSTRUCT,GET,SET
-        public Planta(int numPlanta, Escalera numEscalera, List<Piso> listaPiso)
+        public Planta()
         {
-            _numPlanta = numPlanta;
-            _numEscalera = numEscalera;
-            _listaPiso = listaPiso;
+            
         }
 
         public int NumPlanta
@@ -49,7 +47,7 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public Escalera NumEscalera
+        public int NumEscalera
         {
             get { return _numEscalera;}
             set

@@ -23,7 +23,8 @@ namespace Csharp_GestorComunidades.View
         private ComunidadModelView modelNBH = new ComunidadModelView();
         private PortalModelView modelPortal = new PortalModelView();
         private EscaleraModelView modelStair = new EscaleraModelView();
-        int numPortals;
+        private PlantaModelView modelPlanta = new PlantaModelView();
+        
         Comunidad neighb;
         public NewPortals(Comunidad nbh)
         {
@@ -41,7 +42,8 @@ namespace Csharp_GestorComunidades.View
             ////TEST: Para comprobar que el id de la comunidad lo coge bien
             //MessageBox.Show($"El id de la comunidad {nbhName} es {IDNBH}");
 
-
+            //Initialice list of Plantas in Stairs
+            modelStair.ListaPlantas = new List<Planta>();
             //Initialice list of Stairs in Portal
             modelPortal.ListStairs = new List<Escalera>();
             //Add portals to nbh listPortales
@@ -102,7 +104,8 @@ namespace Csharp_GestorComunidades.View
             else
             {
                 MessageBox.Show("Portales añadidos");
-                
+                NewAppartment windowAppart = new NewAppartment(modelPlanta,modelStair);
+                windowAppart.Show();
                 this.Hide();
             }
         }
@@ -110,45 +113,93 @@ namespace Csharp_GestorComunidades.View
         //Method to add stairs to each portal
         private void addStairs(object sender, RoutedEventArgs e)
         {
+            String numPlantas;
+            int numPlantasINT;
+            numPlantas = tboxNumPlantas.Text.ToString();
             
-            TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
-            DataGrid newDataGrid = activeTab?.Content as DataGrid;
 
-            //To make sure in which portal are we add stairs
-
-            int actualNumStairs;
-            if (activeTab != null)
+            if (numPlantas.Equals(""))
             {
-                //Get the index+1 of the actual tabItem( Portal 1 index 0+1, portal 2 index 1+1...)
-                int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
-
-                //Get the actual numStairs the Portal has
-                actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
-                actualNumStairs++;
-                modelPortal.NumStairs = actualNumStairs;
-                //Add numStairs to the DDBB
-                modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
-                //Add numStairs to the listPortals
-                modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs; 
-                MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. Escaleras actuales: {modelPortal.NumStairs}");
-
-                modelStair.NumPortal = modelPortal.getIDPortal(modelPortal.IDNBH,numPortalINDEX);
-                modelStair.NumEscalera = modelPortal.NumStairs;
-                
-                //Add stairs to the DDBB and listOfStairs
-                Escalera newStair = new Escalera
-                {
-                    NumEscalera = modelStair.NumEscalera,
-                    NumPortal = modelStair.NumPortal,
-                    ListaPlantas = modelStair.ListaPlantas
-                    
-                };
-
-                modelStair.ListStairs.Add(newStair);
-                modelStair.newStair();
-                modelPortal.ListStairs.Add(newStair);
-                //modelPortal.ListStairs.Add(newStair);
+                MessageBox.Show("Por favor introduce un número de plantas");
             }
+            else
+            {
+                numPlantasINT = int.Parse(numPlantas);
+
+                TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
+                DataGrid newDataGrid = activeTab?.Content as DataGrid;
+
+                
+                //To make sure in which portal are we add stairs
+
+                int actualNumStairs;
+                if (activeTab != null)
+                {
+                    //Get the index+1 of the actual tabItem( Portal 1 index 0+1, portal 2 index 1+1...)
+                    int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
+
+                    //Get the actual numStairs the Portal has
+                    actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
+                    actualNumStairs++;
+                    modelPortal.NumStairs = actualNumStairs;
+                    //Add numStairs to the DDBB
+                    modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
+                    //Add numStairs to the listPortals
+                    modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs;
+                    MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. Escaleras actuales: {modelPortal.NumStairs}");
+
+                    modelStair.NumPortal = modelPortal.getIDPortal(modelPortal.IDNBH, numPortalINDEX);
+                    modelStair.NumEscalera = modelPortal.NumStairs;
+
+                    try
+                    {
+                        //Add stairs to the DDBB and listOfStairs
+                        Escalera newStair = new Escalera
+                        {
+                            NumEscalera = modelStair.NumEscalera,
+                            NumPortal = modelStair.NumPortal,
+                            ListaPlantas = modelStair.ListaPlantas
+
+                        };
+
+                        modelStair.ListStairs.Add(newStair);
+                        modelStair.newStair();
+                        modelPortal.ListStairs.Add(newStair);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No se han podido añadir escaleras a la BBDD");
+                    }
+                    
+
+                    try
+                    {
+                        // Add plantas to the DDBB and ListOfPlantas
+                        for (int i = 0; i < numPlantasINT; i++)
+                        {
+                            Planta p = new Planta
+                            {
+                                NumPlanta = 0,
+                                NumEscalera = modelStair.getIDStair(modelStair.NumPortal, modelStair.NumEscalera),
+                                ListaPisos = modelPlanta.ListaPisos
+                            };
+                            modelPlanta.ListPlanta.Add(p);
+                            modelStair.ListaPlantas.Add(p);
+                            //modelPlanta.newPlanta();
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No se han podido añadir plantas a la BBDD");
+                    }
+                   
+
+                }
+
+            }
+            
 
 
         }
