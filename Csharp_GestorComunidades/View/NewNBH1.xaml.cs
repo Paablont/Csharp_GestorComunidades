@@ -24,7 +24,7 @@ namespace Csharp_GestorComunidades
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();
 
-        private bool alreadyExist = false;
+        
         private int numPortales, surface;
         public NewNBH1()
         {
@@ -89,7 +89,7 @@ namespace Csharp_GestorComunidades
             }
             else
             {
-                MessageBox.Show("Ya existe una Comunidad con ese nombre");
+                MessageBox.Show("Ya existe una comunidad con ese nombre");
             }
 
         }

@@ -30,6 +30,7 @@ namespace Csharp_GestorComunidades.ModelView
         public PlantaModelView()
         {
             _listP = new ObservableCollection<Planta>();
+            _listaPiso = new List<Piso>();
 
 
         }

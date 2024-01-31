@@ -1,4 +1,5 @@
-﻿using Csharp_GestorComunidades.ModelView;
+﻿using Csharp_GestorComunidades.Clases;
+using Csharp_GestorComunidades.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,30 +94,33 @@ namespace Csharp_GestorComunidades.View
         {
             if (cbbNumEscaleras.SelectedIndex >= 0 && cbbNumEscaleras.SelectedIndex < numStairs.Count)
             {
-                //Index of selected cbbox
+                // Obtener la escalera seleccionada
                 int selectedIndex = cbbNumEscaleras.SelectedIndex;
+                Escalera selectedStair = modelStair.ListStairs[selectedIndex];
 
-                if (selectedIndex >= 0 && selectedIndex < modelStair.ListStairs.Count)
+                if (selectedStair != null)
                 {
                     numPlanta.Clear();
 
-                    //List of plantas associate with stairs index
-                    var plantasAsociadas = modelStair.ListStairs[selectedIndex].ListaPlantas;
+                    // Obtener la lista de plantas asociadas a la escalera seleccionada
+                    var plantasAsociadas = selectedStair.ListaPlantas;
 
                     for (int i = 0; i < plantasAsociadas.Count; i++)
                     {
                         numPlanta.Add($"Planta {(i + 1)}");
                     }
 
-                    //Update ccbox plantas
+                    // Actualizar ComboBox de plantas
                     cbbNumPlantas.ItemsSource = null;
                     cbbNumPlantas.ItemsSource = numPlanta;
 
-                    
+                    // Seleccionar la primera planta por defecto
                     cbbNumPlantas.SelectedIndex = 0;
                 }
             }
         }
+
+
 
 
 
