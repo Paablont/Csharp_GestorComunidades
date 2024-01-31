@@ -181,13 +181,13 @@ namespace Csharp_GestorComunidades.View
                         {
                             Planta p = new Planta
                             {
-                                NumPlanta = 0,
+                                NumPlanta = (i+1),
                                 NumEscalera = modelStair.getIDStair(modelStair.NumPortal, modelStair.NumEscalera),
                                 ListaPisos = modelPlanta.ListaPisos
                             };
                             modelPlanta.ListPlanta.Add(p);
                             modelStair.ListaPlantas.Add(p);
-                            //modelPlanta.newPlanta();
+                            modelPlanta.newPlanta(p.NumPlanta,p.NumEscalera);
 
                         }
                     }

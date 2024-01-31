@@ -12,8 +12,8 @@ namespace Csharp_GestorComunidades.Clases
         #region ATRIBUTOS
         private char _letraPiso;
         private List<Propietario> _listaPropietarios;
-        private Planta _numPlanta;
-        private int _numParking, _numTrastero; //Estos campos se generan aleatoriamente
+        private int _numPlanta;
+        private int _numParking, _numTrastero, _numPropietario; //Estos campos se generan aleatoriamente
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string propertyName)
@@ -24,13 +24,9 @@ namespace Csharp_GestorComunidades.Clases
         #endregion
         #region CONSTRUCT,GET,SET
 
-        public Piso(char letraPiso, List<Propietario> listaPropietarios, Planta numPlanta, int numParking, int numTrastero)
+        public Piso()
         {
-            _letraPiso = letraPiso;
-            _listaPropietarios = listaPropietarios;
-            _numPlanta = numPlanta;
-            _numParking = numParking;
-            _numTrastero = numTrastero;
+           
         }
 
         public Char LetraPiso
@@ -53,7 +49,17 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public Planta NumPlanta
+        public int NumPropietario
+        {
+            get { return _numPropietario; }
+            set
+            {
+                _numPropietario = value;
+                OnPropertyChange(nameof(NumPropietario));
+            }
+        }
+
+        public int NumPlanta
         {
             get { return _numPlanta; }
             set

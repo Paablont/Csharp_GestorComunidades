@@ -82,11 +82,11 @@ namespace Csharp_GestorComunidades.ModelView
 
         #region SQL
 
-        public void newPlanta()
+        public void newPlanta(int numP,int numE)
         {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO planta (numPlanta,idEscalera)" +
-                         $" VALUES ('{NumPlanta}', '{NumEscalera}');";
+                         $" VALUES ('{numP}', '{numE}');";
 
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
