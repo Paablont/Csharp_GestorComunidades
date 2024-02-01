@@ -14,8 +14,8 @@ namespace Csharp_GestorComunidades.ModelView
     {
         #region ATRIBUTOS
         private const String cnstr = "server=localhost;uid=pablo;pwd=pablo;database=comunidad";
-        private int _numPlanta;
-        private int _numEscalera;
+        private int _numPlanta=0;
+        private int _numEscalera=0;
         private List<Piso> _listaPiso;
         private ObservableCollection<Planta> _listP;
 

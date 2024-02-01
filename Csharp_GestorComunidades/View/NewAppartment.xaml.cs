@@ -127,8 +127,8 @@ namespace Csharp_GestorComunidades.View
             Piso newp = new Piso
             {
                 LetraPiso = 'A',
-                NumPropietario = 2,
-                NumPlanta = (cbbNumPlantas.SelectedIndex +1),
+                NumPropietario = 3,
+                NumPlanta = modelPlanta.getID((cbbNumPlantas.SelectedIndex + 1)),
                 NumParking = rnd.Next(1,11),
                 NumTrastero = rnd.Next(1,11),
                 ListaPropietarios = modelPiso.ListaPropietarios
@@ -136,7 +136,7 @@ namespace Csharp_GestorComunidades.View
             };
             modelPlanta.ListaPisos.Add(newp);
             modelPiso.ListPiso.Add(newp);
-            modelPiso.newPiso(newp.LetraPiso, newp.NumPropietario, newp.NumPlanta, newp.NumParking, newp.NumTrastero);
+            modelPiso.newPiso();
 
         }
 
