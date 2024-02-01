@@ -7,14 +7,22 @@
         mc:Ignorable="d"
         Title="NewAppartment" Height="450" Width="800">
     <Grid>
-        <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="51,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="643" FontWeight="Bold"/>
+        <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="644" FontWeight="Bold"/>
         <ComboBox x:Name="cbbNumPlantas" HorizontalAlignment="Left" Margin="232,108,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="txtPlanta" Content="Número de planta" HorizontalAlignment="Left" Margin="108,106,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbbNumPortal" SelectionChanged="CbbNumPortal_SelectionChanged" HorizontalAlignment="Left" Margin="232,72,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="txtPortales" Content="Número de portal" HorizontalAlignment="Left" Margin="110,68,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbbNumEscaleras" SelectionChanged="CbbNumEscaleras_SelectionChanged" HorizontalAlignment="Left" Margin="494,72,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="txtEscalera" Content="Número de escalera" HorizontalAlignment="Left" Margin="372,68,0,0" VerticalAlignment="Top"/>
-        
+        <Button x:Name="btnNewPiso" Click="newAppartment" Content="Añadir piso" HorizontalAlignment="Left" Margin="110,175,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="51,217,87,10">
+            <DataGrid.Columns>
+                <!---Para mostrarlo en el Datagrid se bindea con la clase objeto Parties-->
+                <DataGridTextColumn Header="Letra" Binding="{Binding LetraPiso,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Parking" Binding="{Binding NumParking,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Trastero" Binding="{Binding NumTrastero,Mode=TwoWay}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

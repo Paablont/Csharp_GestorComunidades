@@ -23,11 +23,12 @@ namespace Csharp_GestorComunidades.View
         PlantaModelView modelPlanta;
         EscaleraModelView modelStair;
         PortalModelView modelPortal;
+        PisoModelView modelPiso = new PisoModelView();
 
         List<string> numPlanta = new List<string>();
         List<string> numPortales = new List<string>();
         List<string> numStairs = new List<string>();
-
+        
         public NewAppartment(PlantaModelView plantas, EscaleraModelView escaleras, PortalModelView portales)
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace Csharp_GestorComunidades.View
             modelStair = escaleras;
             modelPortal = portales;
             DataContext = modelPlanta;
-
+            modelPlanta.ListaPisos = new List<Piso>();
             //Initialize COMBOBOX portal
             for (int i = 0; i < modelPortal.ListPortals.Count; i++)
             {
@@ -118,6 +119,25 @@ namespace Csharp_GestorComunidades.View
                     cbbNumPlantas.SelectedIndex = 0;
                 }
             }
+        }
+
+        private void newAppartment(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            Piso newp = new Piso
+            {
+                LetraPiso = 'A',
+                NumPropietario = 2,
+                NumPlanta = (cbbNumPlantas.SelectedIndex +1),
+                NumParking = rnd.Next(1,11),
+                NumTrastero = rnd.Next(1,11),
+                ListaPropietarios = modelPiso.ListaPropietarios
+                
+            };
+            modelPlanta.ListaPisos.Add(newp);
+            modelPiso.ListPiso.Add(newp);
+            modelPiso.newPiso(newp.LetraPiso, newp.NumPropietario, newp.NumPlanta, newp.NumParking, newp.NumTrastero);
+
         }
 
 

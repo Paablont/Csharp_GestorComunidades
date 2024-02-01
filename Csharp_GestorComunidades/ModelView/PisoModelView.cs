@@ -34,6 +34,7 @@ namespace Csharp_GestorComunidades.ModelView
         public PisoModelView()
         {
             _listPiso = new ObservableCollection<Piso>();
+            
         }
 
         public Char LetraPiso
@@ -55,6 +56,15 @@ namespace Csharp_GestorComunidades.ModelView
                 OnPropertyChange(nameof(ListaPropietarios));
             }
         }
+        public int NumPropietario
+        {
+            get { return _numPropietario; }
+            set
+            {
+                _numPropietario = value;
+                OnPropertyChange(nameof(NumPropietario));
+            }
+        }
 
         public int NumPlanta
         {
@@ -66,15 +76,7 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
-        public int NumPropietario
-        {
-            get { return _numPropietario; }
-            set
-            {
-                _numPropietario = value;
-                OnPropertyChange(nameof(NumPropietario));
-            }
-        }
+        
         public int NumParking
         {
             get { return _numParking; }
@@ -107,11 +109,11 @@ namespace Csharp_GestorComunidades.ModelView
         #endregion
 
         #region SQL
-        public void newPiso()
+        public void newPiso(Char letra, int nump,int numpl,int numpk,int numt)
         {           
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO piso (letraPiso,idPropietario,idPlanta,idParking,idTrastero)" +
-                $" VALUES ('{LetraPiso}','{NumPropietario}','{NumPlanta}','{NumParking}','{NumTrastero}');";
+                $" VALUES ('{letra}','{nump}','{numpl}','{numpk}','{numt}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
