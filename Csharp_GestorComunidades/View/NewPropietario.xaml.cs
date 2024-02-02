@@ -60,7 +60,7 @@ namespace Csharp_GestorComunidades.View
 
         private void newPropietario(object sender, RoutedEventArgs e)
         {
-            if (modelPropietario.ListPropietario.Where(x => x.Name == modelPropietario.Name).FirstOrDefault() == null)
+            if (modelPropietario.ListPropietario.Where(x => x.DNI == modelPropietario.DNI).FirstOrDefault() == null)
             {
                 if (modelPropietario.Name.Equals("") || modelPropietario.Surname.Equals("") || modelPropietario.Address.Equals("") || modelPropietario.DNI.Equals("") || modelPropietario.City.Equals("") || modelPropietario.Provincia.Equals("") || modelPropietario.CP.Equals(""))
                 {
@@ -85,6 +85,10 @@ namespace Csharp_GestorComunidades.View
                         modelPropietario.ListPropietario.Add(newPropietario);
                         modelPropietario.newPropietario();
                         MessageBox.Show($"Propietario {newPropietario.Name} añadido correctamente");
+
+                        //Call method to update combobox propietario in NewApartment.xaml.cs
+                        (Application.Current.MainWindow as NewAppartment)?.UpdatePropietariosComboBox();
+
                         this.Hide();
                     }
                     else
@@ -95,9 +99,11 @@ namespace Csharp_GestorComunidades.View
             }
             else
             {
-                MessageBox.Show("Ya existe un propietario con ese nombre");
+                MessageBox.Show("Ya existe un propietario con ese DNI");
             }
         }
+
+       
 
     }
 }

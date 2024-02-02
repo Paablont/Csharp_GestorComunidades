@@ -10,7 +10,6 @@
         <Label x:Name="txtTitulo" Content="GESTOR DE COMUNIDADES" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
         <Button x:Name="btnManageNBH" Content="Gestionar Comunidad" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Height="46" Width="148"/>
         <Button x:Name="btnCreateNBH" Content="Crear una nueva comunidad" HorizontalAlignment="Center" VerticalAlignment="Center" Height="46" Width="200" Click="OpenNewComunity"/>
-        <Button x:Name="btnPropietario" Click="openNewPropietario" Content="Crear propietario" HorizontalAlignment="Left" Margin="561,144,0,0" VerticalAlignment="Top" Height="47" Width="118"/>
 
     </Grid>
 </Window>

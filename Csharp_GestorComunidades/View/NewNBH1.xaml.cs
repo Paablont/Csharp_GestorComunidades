@@ -19,12 +19,15 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Csharp_GestorComunidades
 {
+    /*
+         *******************************************************************
+         *              FIRST WINDOW. CREATE NEW NEIGHBORHOOD
+         *******************************************************************              
+         */
 
     public partial class NewNBH1 : Window
     {
-        private ComunidadModelView modelNBH = new ComunidadModelView();
-
-        
+        private ComunidadModelView modelNBH = new ComunidadModelView();       
         private int numPortales, surface;
         public NewNBH1()
         {
@@ -33,11 +36,7 @@ namespace Csharp_GestorComunidades
             modelNBH.LoadNBH();
         }
 
-        /*
-         *******************************************************************
-         *              FIRST WINDOW. CREATE NEW NEIGHBORHOOD
-         *******************************************************************              
-         */
+        #region FUNCTIONS
         private void addNeighborhood(object sender, RoutedEventArgs e)
         {
             numPortales = modelNBH.NumPortales;
@@ -47,10 +46,12 @@ namespace Csharp_GestorComunidades
                 if (modelNBH.NameNeighborhood.Equals("") || modelNBH.Address.Equals("") || modelNBH.Surface.Equals("") || modelNBH.NumPortales.Equals(""))
                 {
                     MessageBox.Show("Error. Hay campos sin rellenar");
-                }else if (surface <= 0)
+                }
+                else if (surface <= 0)
                 {
                     MessageBox.Show("La superficie de la comunidad no puede ser 0 o números negativos");
-                }else if(numPortales <= 0)
+                }
+                else if (numPortales <= 0)
                 {
                     MessageBox.Show("El número de portales de la comunidad no puede ser 0 o números negativos");
                 }
@@ -77,14 +78,13 @@ namespace Csharp_GestorComunidades
                     modelNBH.newNeighborhood();
 
                     //Generate an object of the new Window (NewPortals.xaml) and show it
-                    NewPortals windowPortal = new NewPortals(newNBH);                    
-                    windowPortal.Show();  
-                    
+                    NewPortals windowPortal = new NewPortals(newNBH);
+                    windowPortal.Show();
+
                     //Hide the actual window (NewNBH1.xaml)
                     this.Hide();
 
                 }
-
 
             }
             else
@@ -93,8 +93,10 @@ namespace Csharp_GestorComunidades
             }
 
         }
+        #endregion
 
-       
-        
+
+
+
     }
 }

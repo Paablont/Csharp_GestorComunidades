@@ -20,33 +20,22 @@ namespace Csharp_GestorComunidades
    
     public partial class MainWindow : Window
     {
-        PropietarioModelView modelPropietario = new PropietarioModelView();
+        
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = modelPropietario;
-            modelPropietario.LoadPropietarios();
+            
         }
         private void OpenNewComunity(object sender, RoutedEventArgs e)
         {
-            if(modelPropietario.ListPropietario.Count == 0)
-            {
-                MessageBox.Show("Actualmente no existe ningún propietario registrado en el sistema. Necesitas tener al " +
-                    "menos un propietario registrado para crear la comunidad y asignarle mínimo un piso a ese propietario");
-            }
-            else
-            {
+            
                 NewNBH1 otherWindow = new NewNBH1();
                 otherWindow.Show();
-            }
+           
            
         }
 
-        private void openNewPropietario(object sender, RoutedEventArgs e)
-        {
-            NewPropietario propWindow = new NewPropietario();
-            propWindow.Show();
-        }
+        
 
     }
 }

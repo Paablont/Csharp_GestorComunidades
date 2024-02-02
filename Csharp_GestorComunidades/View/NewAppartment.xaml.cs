@@ -30,7 +30,8 @@ namespace Csharp_GestorComunidades.View
         List<string> numPortalesString = new List<string>();
         List<string> numStairsString = new List<string>();
         List<string> numPropietariosString = new List<string>();
-        
+
+        #region CONST
         public NewAppartment(PlantaModelView plantas, EscaleraModelView escaleras, PortalModelView portales)
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace Csharp_GestorComunidades.View
             DataContext = modelPlanta;
             modelPropietario.LoadPropietarios();
             modelPlanta.ListaPisos = new List<Piso>();
+
             //Initialize COMBOBOX portal
             for (int i = 0; i < modelPortal.ListPortals.Count; i++)
             {
@@ -58,28 +60,36 @@ namespace Csharp_GestorComunidades.View
                 numPlantaString.Add($"Planta {(i + 1)}");
             }
 
-            for(int i = 0; i < modelPropietario.ListPropietario.Count; i++)
+            //Initialize COMBOBOX propietarios (name, surname and DNI)
+            for (int i = 0; i < modelPropietario.ListPropietario.Count; i++)
             {
-                numPropietariosString.Add($"{modelPropietario.ListPropietario[i].Name}  {modelPropietario.ListPropietario[i].Surname} ");
+                numPropietariosString.Add($"{modelPropietario.ListPropietario[i].Name}  {modelPropietario.ListPropietario[i].Surname},{modelPropietario.ListPropietario[i].DNI} ");
             }
-            //Set num portals in CCBOX portal
+
+            //Set num portals in CCBOX portal and num propietarios in CCBOX propietarios
             cbbNumPortal.ItemsSource = numPortalesString;
             cbbPropietarios.ItemsSource = numPropietariosString;
+
             //Change amount of stairs from portal number
             cbbNumPortal.SelectionChanged += CbbNumPortal_SelectionChanged;
+
             //Change amount of plantas from stair number
             cbbNumEscaleras.SelectionChanged += CbbNumEscaleras_SelectionChanged;
         }
 
+        #endregion
+        #region FUNCTIONS
+
+        //Method to change the value of Stair CCBOX depends on the selected Portal
         private void CbbNumPortal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             if (cbbNumPortal.SelectedIndex >= 0 && cbbNumPortal.SelectedIndex < numPortalesString.Count)
             {
                 //Index of selected cbbox
                 int selectedIndex = cbbNumPortal.SelectedIndex;
 
-                
+
                 if (selectedIndex >= 0 && selectedIndex < modelPortal.ListPortals.Count)
                 {
                     numStairsString.Clear();
@@ -92,12 +102,13 @@ namespace Csharp_GestorComunidades.View
                     cbbNumEscaleras.ItemsSource = null;
                     cbbNumEscaleras.ItemsSource = numStairsString;
 
-                    
+
                     CbbNumEscaleras_SelectionChanged(null, null);
                 }
             }
         }
 
+        //Method to change the value of Planta CCBOX depends on the selected Stair
         private void CbbNumEscaleras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbbNumEscaleras.SelectedIndex >= 0 && cbbNumEscaleras.SelectedIndex < numStairsString.Count)
@@ -110,7 +121,7 @@ namespace Csharp_GestorComunidades.View
                 int numPlantas = modelPlanta.getNumPlantas(idEscalera);
                 if (selectedStair != null)
                 {
-                    numPlantaString.Clear();                   
+                    numPlantaString.Clear();
 
                     for (int i = 0; i < numPlantas; i++)
                     {
@@ -127,9 +138,10 @@ namespace Csharp_GestorComunidades.View
             }
         }
 
+        //Method to add new apartment(Piso)
         private void newAppartment(object sender, RoutedEventArgs e)
         {
-            if(cbbPropietarios.SelectedIndex >= 0)
+            if (cbbPropietarios.SelectedIndex >= 0)
             {
                 Random rnd = new Random();
                 int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
@@ -151,25 +163,47 @@ namespace Csharp_GestorComunidades.View
                 {
                     modelPiso.newPiso(newp.LetraPiso, newp.NumParking, newp.NumTrastero, newp.NumPlanta, newp.NumPropietario);
                     //modelPiso.newPiso();
+                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta {newp.NumPlanta} correctamente");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al meter piso en BBDD");
+                    MessageBox.Show("Error al añadir un piso");
                 }
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona al menos un propietario.");
+                MessageBox.Show("Por favor, selecciona al menos un propietario. Si no sale ningun propietario en la lista, añada uno");
+            }
+        }
+
+        //Update Combobox propietarios if you add new one
+        public void UpdatePropietariosComboBox()
+        {
+            numPropietariosString.Clear();
+
+            
+            for (int i = 0; i < modelPropietario.ListPropietario.Count; i++)
+            {
+                numPropietariosString.Add($"{modelPropietario.ListPropietario[i].Name}  {modelPropietario.ListPropietario[i].Surname},{modelPropietario.ListPropietario[i].DNI} ");
             }
 
-
-
+            
+            cbbPropietarios.ItemsSource = null;
+            cbbPropietarios.ItemsSource = numPropietariosString;
         }
 
 
+        //Method to open NewPropietario (to create new one)
+        private void openNewPropietario(object sender, RoutedEventArgs e)
+        {
+            NewPropietario propWindow = new NewPropietario();
 
+            propWindow.ShowDialog();
 
+            UpdatePropietariosComboBox();
 
+        }
+        #endregion
     }
 
 }
