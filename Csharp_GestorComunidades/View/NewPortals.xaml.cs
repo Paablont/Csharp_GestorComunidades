@@ -139,13 +139,13 @@ namespace Csharp_GestorComunidades.View
                     //Get the index+1 of the actual tabItem( Portal 1 index 0+1, portal 2 index 1+1...)
                     int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
 
-                    //Get the actual numStairs the Portal has
+                    //Get the actual numStairsString the Portal has
                     actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
                     actualNumStairs++;
                     modelPortal.NumStairs = actualNumStairs;
-                    //Add numStairs to the DDBB
+                    //Add numStairsString to the DDBB
                     modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
-                    //Add numStairs to the listPortals
+                    //Add numStairsString to the listPortals
                     modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs;
                     MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. Escaleras actuales: {modelPortal.NumStairs}");
 

@@ -23,6 +23,7 @@
                 <DataGridTextColumn Header="Trastero" Binding="{Binding NumTrastero,Mode=TwoWay}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <ComboBox x:Name="cbbPropietarios" HorizontalAlignment="Left" Margin="400,141,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

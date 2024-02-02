@@ -109,44 +109,26 @@ namespace Csharp_GestorComunidades.ModelView
         #endregion
 
         #region SQL
-        public void newPiso()
-        {           
+        public void newPiso(char letra, int numPk, int numT, int numPl, int numPrp)
+        {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO piso (letraPiso,idParking,idTrastero,idPlanta,idPropietario)" +
-                $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{NumPlanta}','{NumPropietario}');";
+                $" VALUES ('{letra}','{numPk}','{numT}','{numPl}','{numPrp}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
+        //public void newPiso()
+        //{
+        //    //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
+        //    String SQL = $"INSERT INTO piso (letraPiso,idParking,idTrastero,idPlanta,idPropietario)" +
+        //        $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{NumPlanta}','{NumPropietario}');";
+        //    //usaremos las clases de la librería de MySQL para ejecutar queries
+        //    //Instalar el paquete MySQL.Data
+        //    MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        //}
 
-        public int getID(int numPlanta)
-        {
-
-            int idPortal = 0;
-            try
-            {
-                String SQL = $"SELECT idplanta FROM planta WHERE numPlanta = '{numPlanta}' AND numPortal = '{numPortal}'";
-
-                // Ejecuta la consulta y obtén el resultado
-                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
-
-                // Verifica si se obtuvo un resultado no nulo
-                if (result != null)
-                {
-                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
-                    idPortal = Convert.ToInt32(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
-                MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
-            }
-
-            return idPortal;
-        }
-
-        public void LoadNBH()
+        public void LoadPiso()
         {
             String SQL = $"SELECT * FROM piso;";
             DataTable dt = MySQLDataComponent.LoadData(SQL, cnstr);

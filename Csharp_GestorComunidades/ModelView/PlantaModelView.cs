@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Csharp_GestorComunidades.ModelView
 {
@@ -91,6 +92,60 @@ namespace Csharp_GestorComunidades.ModelView
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
+        }
+
+        public int getIDPlanta(int numPlanta, int idEscalera)
+        {
+
+            int idPlanta = 0;
+            try
+            {
+                String SQL = $"SELECT idplanta FROM planta WHERE numPlanta = '{numPlanta}' AND idEscalera = '{idEscalera}'";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    idPlanta = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
+            }
+
+            return idPlanta;
+        }
+
+        public int getNumPlantas(int idEscalera)
+        {
+            int numPlantas = 0;
+
+            try
+            {
+                String SQL = $"SELECT COUNT(*) FROM planta WHERE idEscalera = {idEscalera};";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    numPlantas = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el num plantas: {ex.Message}");
+            }
+
+            return numPlantas;
         }
         #endregion
     }

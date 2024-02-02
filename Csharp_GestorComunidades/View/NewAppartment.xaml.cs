@@ -23,11 +23,13 @@ namespace Csharp_GestorComunidades.View
         PlantaModelView modelPlanta;
         EscaleraModelView modelStair;
         PortalModelView modelPortal;
+        PropietarioModelView modelPropietario = new PropietarioModelView();
         PisoModelView modelPiso = new PisoModelView();
 
-        List<string> numPlanta = new List<string>();
-        List<string> numPortales = new List<string>();
-        List<string> numStairs = new List<string>();
+        List<string> numPlantaString = new List<string>();
+        List<string> numPortalesString = new List<string>();
+        List<string> numStairsString = new List<string>();
+        List<string> numPropietariosString = new List<string>();
         
         public NewAppartment(PlantaModelView plantas, EscaleraModelView escaleras, PortalModelView portales)
         {
@@ -36,28 +38,33 @@ namespace Csharp_GestorComunidades.View
             modelStair = escaleras;
             modelPortal = portales;
             DataContext = modelPlanta;
+            modelPropietario.LoadPropietarios();
             modelPlanta.ListaPisos = new List<Piso>();
             //Initialize COMBOBOX portal
             for (int i = 0; i < modelPortal.ListPortals.Count; i++)
             {
-                numPortales.Add($"Portal {(i + 1)}");
+                numPortalesString.Add($"Portal {(i + 1)}");
             }
 
             //Initialize COMBOBOX esclaera
             for (int i = 0; i < modelStair.ListStairs.Count; i++)
             {
-                numStairs.Add($"Escalera {(i + 1)}");
+                numStairsString.Add($"Escalera {(i + 1)}");
             }
 
             //Initialize COMBOBOX planta
             for (int i = 0; i < modelPlanta.ListPlanta.Count; i++)
             {
-                numPlanta.Add($"Planta {(i + 1)}");
+                numPlantaString.Add($"Planta {(i + 1)}");
             }
 
+            for(int i = 0; i < modelPropietario.ListPropietario.Count; i++)
+            {
+                numPropietariosString.Add($"{modelPropietario.ListPropietario[i].Name}  {modelPropietario.ListPropietario[i].Surname} ");
+            }
             //Set num portals in CCBOX portal
-            cbbNumPortal.ItemsSource = numPortales;
-
+            cbbNumPortal.ItemsSource = numPortalesString;
+            cbbPropietarios.ItemsSource = numPropietariosString;
             //Change amount of stairs from portal number
             cbbNumPortal.SelectionChanged += CbbNumPortal_SelectionChanged;
             //Change amount of plantas from stair number
@@ -67,7 +74,7 @@ namespace Csharp_GestorComunidades.View
         private void CbbNumPortal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            if (cbbNumPortal.SelectedIndex >= 0 && cbbNumPortal.SelectedIndex < numPortales.Count)
+            if (cbbNumPortal.SelectedIndex >= 0 && cbbNumPortal.SelectedIndex < numPortalesString.Count)
             {
                 //Index of selected cbbox
                 int selectedIndex = cbbNumPortal.SelectedIndex;
@@ -75,15 +82,15 @@ namespace Csharp_GestorComunidades.View
                 
                 if (selectedIndex >= 0 && selectedIndex < modelPortal.ListPortals.Count)
                 {
-                    numStairs.Clear();
+                    numStairsString.Clear();
                     for (int i = 0; i < modelPortal.ListPortals[selectedIndex].NumStairs; i++)
                     {
-                        numStairs.Add($"Escalera {(i + 1)}");
+                        numStairsString.Add($"Escalera {(i + 1)}");
                     }
 
                     //Update ccbox Stairs
                     cbbNumEscaleras.ItemsSource = null;
-                    cbbNumEscaleras.ItemsSource = numStairs;
+                    cbbNumEscaleras.ItemsSource = numStairsString;
 
                     
                     CbbNumEscaleras_SelectionChanged(null, null);
@@ -93,27 +100,26 @@ namespace Csharp_GestorComunidades.View
 
         private void CbbNumEscaleras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbbNumEscaleras.SelectedIndex >= 0 && cbbNumEscaleras.SelectedIndex < numStairs.Count)
+            if (cbbNumEscaleras.SelectedIndex >= 0 && cbbNumEscaleras.SelectedIndex < numStairsString.Count)
             {
                 // Obtener la escalera seleccionada
                 int selectedIndex = cbbNumEscaleras.SelectedIndex;
                 Escalera selectedStair = modelStair.ListStairs[selectedIndex];
-
+                int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
+                int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
+                int numPlantas = modelPlanta.getNumPlantas(idEscalera);
                 if (selectedStair != null)
                 {
-                    numPlanta.Clear();
+                    numPlantaString.Clear();                   
 
-                    // Obtener la lista de plantas asociadas a la escalera seleccionada
-                    var plantasAsociadas = selectedStair.ListaPlantas;
-
-                    for (int i = 0; i < plantasAsociadas.Count; i++)
+                    for (int i = 0; i < numPlantas; i++)
                     {
-                        numPlanta.Add($"Planta {(i + 1)}");
+                        numPlantaString.Add($"Planta {(i + 1)}");
                     }
 
                     // Actualizar ComboBox de plantas
                     cbbNumPlantas.ItemsSource = null;
-                    cbbNumPlantas.ItemsSource = numPlanta;
+                    cbbNumPlantas.ItemsSource = numPlantaString;
 
                     // Seleccionar la primera planta por defecto
                     cbbNumPlantas.SelectedIndex = 0;
@@ -124,11 +130,14 @@ namespace Csharp_GestorComunidades.View
         private void newAppartment(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
+            int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
+            int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
+            int idPropietario = modelPropietario.getIDPropietario((cbbPropietarios.SelectedIndex + 1));
             Piso newp = new Piso
             {
                 LetraPiso = 'A',
                 NumPropietario = 3,
-                NumPlanta = modelPlanta.getID((cbbNumPlantas.SelectedIndex + 1)),
+                NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1),idEscalera),
                 NumParking = rnd.Next(1,11),
                 NumTrastero = rnd.Next(1,11),
                 ListaPropietarios = modelPiso.ListaPropietarios
@@ -136,7 +145,16 @@ namespace Csharp_GestorComunidades.View
             };
             modelPlanta.ListaPisos.Add(newp);
             modelPiso.ListPiso.Add(newp);
-            modelPiso.newPiso();
+            try
+            {
+                modelPiso.newPiso(newp.LetraPiso,newp.NumParking,newp.NumTrastero,newp.NumPlanta,newp.NumPropietario);
+                //modelPiso.newPiso();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al meter piso en BBDD");
+            }
+            
 
         }
 
