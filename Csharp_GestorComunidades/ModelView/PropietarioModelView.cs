@@ -124,13 +124,13 @@ namespace Csharp_GestorComunidades.ModelView
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
 
-        public int getIDPropietario(int numPropietario)
+        public int getIDPropietario(String DNI)
         {
 
-            int idPlanta = 0;
+            int idPropietario = 0;
             try
             {
-                String SQL = $"SELECT idpropietario FROM propietario WHERE numPropietario = '{numPropietario}'";
+                String SQL = $"SELECT idpropietario FROM propietario WHERE DNI = '{DNI}'";
 
                 // Ejecuta la consulta y obtén el resultado
                 object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
@@ -139,7 +139,7 @@ namespace Csharp_GestorComunidades.ModelView
                 if (result != null)
                 {
                     // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
-                    idPlanta = Convert.ToInt32(result);
+                    idPropietario = Convert.ToInt32(result);
                 }
             }
             catch (Exception ex)
@@ -148,7 +148,7 @@ namespace Csharp_GestorComunidades.ModelView
                 MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
             }
 
-            return idPlanta;
+            return idPropietario;
         }
 
         public void LoadPropietarios()

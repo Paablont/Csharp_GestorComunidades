@@ -12,7 +12,7 @@ namespace Csharp_GestorComunidades.Clases
         #region ATRIB
         public event PropertyChangedEventHandler? PropertyChanged;
         private string _name, _surname, _address, _city, _provincia, _DNI;
-        private int _CP; //Codiog postal
+        private int _CP, _numPropietario; //Codiog postal
 
         private void OnPropertyChange(string propertyName)
         {
@@ -86,6 +86,15 @@ namespace Csharp_GestorComunidades.Clases
             {
                 _CP = value;
                 OnPropertyChange(nameof(CP));
+            }
+        }
+        public int NumPropietario
+        {
+            get { return _numPropietario; }
+            set
+            {
+                _numPropietario = value;
+                OnPropertyChange(nameof(NumPropietario));
             }
         }
         #endregion

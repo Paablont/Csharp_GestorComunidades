@@ -58,9 +58,9 @@ namespace Csharp_GestorComunidades
                 {
                     Comunidad newNBH = new Comunidad
                     {
-                        NameNeighborhood = modelNBH.NameNeighborhood,
+                        NameNeighborhood = modelNBH.NameNeighborhood.ToUpper(),
                         NumPortales = modelNBH.NumPortales,
-                        Address = modelNBH.Address,
+                        Address = modelNBH.Address.ToUpper(),
                         Date = modelNBH.Date,
                         Surface = modelNBH.Surface,
                         HasPool = modelNBH.HasPool,

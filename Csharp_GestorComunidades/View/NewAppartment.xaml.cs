@@ -129,32 +129,40 @@ namespace Csharp_GestorComunidades.View
 
         private void newAppartment(object sender, RoutedEventArgs e)
         {
-            Random rnd = new Random();
-            int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
-            int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
-            int idPropietario = modelPropietario.getIDPropietario((cbbPropietarios.SelectedIndex + 1));
-            Piso newp = new Piso
+            if(cbbPropietarios.SelectedIndex >= 0)
             {
-                LetraPiso = 'A',
-                NumPropietario = 3,
-                NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1),idEscalera),
-                NumParking = rnd.Next(1,11),
-                NumTrastero = rnd.Next(1,11),
-                ListaPropietarios = modelPiso.ListaPropietarios
-                
-            };
-            modelPlanta.ListaPisos.Add(newp);
-            modelPiso.ListPiso.Add(newp);
-            try
-            {
-                modelPiso.newPiso(newp.LetraPiso,newp.NumParking,newp.NumTrastero,newp.NumPlanta,newp.NumPropietario);
-                //modelPiso.newPiso();
+                Random rnd = new Random();
+                int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
+                int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
+                int idPropietario = modelPropietario.getIDPropietario((modelPropietario.ListPropietario[cbbPropietarios.SelectedIndex].DNI)); ;
+                Piso newp = new Piso
+                {
+                    LetraPiso = 'A',
+                    NumPropietario = idPropietario,
+                    NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera),
+                    NumParking = rnd.Next(1, 11),
+                    NumTrastero = rnd.Next(1, 11),
+                    ListaPropietarios = modelPiso.ListaPropietarios
+
+                };
+                modelPlanta.ListaPisos.Add(newp);
+                modelPiso.ListPiso.Add(newp);
+                try
+                {
+                    modelPiso.newPiso(newp.LetraPiso, newp.NumParking, newp.NumTrastero, newp.NumPlanta, newp.NumPropietario);
+                    //modelPiso.newPiso();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al meter piso en BBDD");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error al meter piso en BBDD");
+                MessageBox.Show("Por favor, selecciona al menos un propietario.");
             }
-            
+
+
 
         }
 

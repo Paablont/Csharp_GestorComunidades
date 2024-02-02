@@ -30,6 +30,34 @@ namespace Csharp_GestorComunidades.View
             modelPropietario.LoadPropietarios();
         }
 
+        //Method to prove DNI is valid (8 digits, 1 char)
+        private bool IsValidDNI(string dni)
+        {
+            
+            if (dni.Length != 9)
+            {
+                return false;
+            }
+            string numericPart = dni.Substring(0, 8);
+
+            if (!int.TryParse(numericPart, out _))
+            {
+                return false;
+            }
+
+            
+            char letter = dni[8];
+
+            
+            if (letter < 'A' || letter > 'Z')
+            {
+                return false;
+            }
+
+           
+            return true;
+        }
+
         private void newPropietario(object sender, RoutedEventArgs e)
         {
             if (modelPropietario.ListPropietario.Where(x => x.Name == modelPropietario.Name).FirstOrDefault() == null)
@@ -37,23 +65,32 @@ namespace Csharp_GestorComunidades.View
                 if (modelPropietario.Name.Equals("") || modelPropietario.Surname.Equals("") || modelPropietario.Address.Equals("") || modelPropietario.DNI.Equals("") || modelPropietario.City.Equals("") || modelPropietario.Provincia.Equals("") || modelPropietario.CP.Equals(""))
                 {
                     MessageBox.Show("Error. Hay campos sin rellenar");
-
                 }
                 else
                 {
-                    Propietario newPropietario = new Propietario
+                    
+                    if (IsValidDNI(modelPropietario.DNI))
                     {
-                        Name = modelPropietario.Name,
-                        Surname = modelPropietario.Surname,
-                        DNI = modelPropietario.DNI,
-                        Address = modelPropietario.Address,
-                        City = modelPropietario.City,
-                        Provincia = modelPropietario.Provincia,
-                        CP = modelPropietario.CP
-                    };
+                        Propietario newPropietario = new Propietario
+                        {
+                            Name = modelPropietario.Name.ToUpper(),
+                            Surname = modelPropietario.Surname.ToUpper(),
+                            DNI = modelPropietario.DNI.ToUpper(),
+                            Address = modelPropietario.Address.ToUpper(),
+                            City = modelPropietario.City.ToUpper(),
+                            Provincia = modelPropietario.Provincia.ToUpper(),
+                            CP = modelPropietario.CP
+                        };
 
-                    modelPropietario.ListPropietario.Add(newPropietario);
-                    modelPropietario.newPropietario();
+                        modelPropietario.ListPropietario.Add(newPropietario);
+                        modelPropietario.newPropietario();
+                        MessageBox.Show($"Propietario {newPropietario.Name} añadido correctamente");
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error. DNI INVALIDO. Recuerda que debe tener 8 numeros y 1 letra");
+                    }
                 }
             }
             else
@@ -61,5 +98,6 @@ namespace Csharp_GestorComunidades.View
                 MessageBox.Show("Ya existe un propietario con ese nombre");
             }
         }
+
     }
 }
