@@ -15,17 +15,10 @@
         <ComboBox x:Name="cbbNumEscaleras" SelectionChanged="CbbNumEscaleras_SelectionChanged" HorizontalAlignment="Left" Margin="494,72,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="txtEscalera" Content="Número de escalera" HorizontalAlignment="Left" Margin="372,68,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnNewPiso" Click="newAppartment" Content="Añadir piso" HorizontalAlignment="Left" Margin="110,175,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="51,217,87,10">
-            <DataGrid.Columns>
-                <!---Para mostrarlo en el Datagrid se bindea con la clase objeto Parties-->
-                <DataGridTextColumn Header="Letra" Binding="{Binding LetraPiso,Mode=TwoWay}" Width="*"/>
-                <DataGridTextColumn Header="Parking" Binding="{Binding NumParking,Mode=TwoWay}" Width="*"/>
-                <DataGridTextColumn Header="Trastero" Binding="{Binding NumTrastero,Mode=TwoWay}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
         <ComboBox x:Name="cbbPropietarios" HorizontalAlignment="Left" Margin="480,163,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnPropietario" Click="openNewPropietario" Content="Crear propietario" HorizontalAlignment="Left" Margin="615,150,0,0" VerticalAlignment="Top" Height="45" Width="98"/>
         <Label x:Name="txtPropietarios" Content="Propietario" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="txtAVISO" Content="(para la creacion solo se le agrega 1 propietario y despues en la gestion se le puede añadir mas)" HorizontalAlignment="Left" Margin="154,217,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

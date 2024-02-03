@@ -120,7 +120,7 @@ namespace Csharp_GestorComunidades.View
                 numPlantasINT = int.Parse(numPlantas);
 
                 TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
-                DataGrid newDataGrid = activeTab?.Content as DataGrid;
+                
 
                 
                 //To make sure in which portal are we add stairs

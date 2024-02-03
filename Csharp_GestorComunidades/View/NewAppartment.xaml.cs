@@ -147,9 +147,16 @@ namespace Csharp_GestorComunidades.View
                 int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
                 int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
                 int idPropietario = modelPropietario.getIDPropietario((modelPropietario.ListPropietario[cbbPropietarios.SelectedIndex].DNI)); ;
+                int idPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
+                // Obtener o inicializar la lista de letras asignadas para la planta actual
+                List<char> letrasAsignadas = ObtenerOInicializarLetrasAsignadas(idPlanta);
+
+                // Obtener la próxima letra disponible
+                char nuevaLetra = ObtenerProximaLetraDisponible(letrasAsignadas);
+
                 Piso newp = new Piso
                 {
-                    LetraPiso = 'A',
+                    LetraPiso = nuevaLetra,
                     NumPropietario = idPropietario,
                     NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera),
                     NumParking = rnd.Next(1, 11),
@@ -163,7 +170,11 @@ namespace Csharp_GestorComunidades.View
                 {
                     modelPiso.newPiso(newp.LetraPiso, newp.NumParking, newp.NumTrastero, newp.NumPlanta, newp.NumPropietario);
                     //modelPiso.newPiso();
-                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta {newp.NumPlanta} correctamente");
+                    // Actualizar la lista de letras asignadas para la planta actual
+                    letrasAsignadas.Add(newp.LetraPiso);
+
+                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.NumPropietario}");
+                    
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +185,36 @@ namespace Csharp_GestorComunidades.View
             {
                 MessageBox.Show("Por favor, selecciona al menos un propietario. Si no sale ningun propietario en la lista, añada uno");
             }
+        }
+
+        private List<char> ObtenerOInicializarLetrasAsignadas(int idPlanta)
+        {
+            // Buscar la lista de letras asignadas para la planta actual
+            var letrasAsignadas = modelPlanta.ListaPisos
+                .Where(p => p.NumPlanta == idPlanta)
+                .Select(p => p.LetraPiso)
+                .ToList();
+
+            // Si la lista no existe, inicializarla
+            if (letrasAsignadas == null)
+            {
+                letrasAsignadas = new List<char>();
+            }
+
+            return letrasAsignadas;
+        }
+
+        private char ObtenerProximaLetraDisponible(List<char> letrasAsignadas)
+        {
+            // Obtener la próxima letra disponible que no ha sido asignada
+            char nuevaLetra = 'A';
+
+            while (letrasAsignadas.Contains(nuevaLetra))
+            {
+                nuevaLetra++;
+            }
+
+            return nuevaLetra;
         }
 
         //Update Combobox propietarios if you add new one
