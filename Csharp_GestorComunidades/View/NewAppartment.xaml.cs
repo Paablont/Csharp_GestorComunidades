@@ -2,6 +2,7 @@
 using Csharp_GestorComunidades.ModelView;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -143,6 +144,7 @@ namespace Csharp_GestorComunidades.View
         {
             if (cbbPropietarios.SelectedIndex >= 0)
             {
+                
                 Random rnd = new Random();
                 int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
                 int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
@@ -154,6 +156,7 @@ namespace Csharp_GestorComunidades.View
                 // Obtener la próxima letra disponible
                 char nuevaLetra = ObtenerProximaLetraDisponible(letrasAsignadas);
 
+                
                 Piso newp = new Piso
                 {
                     LetraPiso = nuevaLetra,
@@ -171,6 +174,8 @@ namespace Csharp_GestorComunidades.View
                     modelPiso.newPiso(newp.LetraPiso, newp.NumParking, newp.NumTrastero, newp.NumPlanta, newp.NumPropietario);
                     //modelPiso.newPiso();
                     // Actualizar la lista de letras asignadas para la planta actual
+                    dvgPisos.ItemsSource = modelPiso.ListPiso;
+                    
                     letrasAsignadas.Add(newp.LetraPiso);
 
                     MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.NumPropietario}");
