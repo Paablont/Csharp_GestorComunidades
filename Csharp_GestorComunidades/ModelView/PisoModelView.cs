@@ -109,24 +109,15 @@ namespace Csharp_GestorComunidades.ModelView
         #endregion
 
         #region SQL
-        public void newPiso(char letra, int numPk, int numT, int numPl, int numPrp)
+        public void newPiso()
         {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO piso (letraPiso,idParking,idTrastero,idPlanta,idPropietario)" +
-                $" VALUES ('{letra}','{numPk}','{numT}','{numPl}','{numPrp}');";
+                $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{NumPlanta}','{NumPropietario}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
         }
-        //public void newPiso()
-        //{
-        //    //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
-        //    String SQL = $"INSERT INTO piso (letraPiso,idParking,idTrastero,idPlanta,idPropietario)" +
-        //        $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{NumPlanta}','{NumPropietario}');";
-        //    //usaremos las clases de la librería de MySQL para ejecutar queries
-        //    //Instalar el paquete MySQL.Data
-        //    MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
-        //}
 
         public void LoadPiso()
         {

@@ -39,7 +39,7 @@ namespace Csharp_GestorComunidades.View
             modelPlanta = plantas;
             modelStair = escaleras;
             modelPortal = portales;
-            DataContext = modelPlanta;
+            DataContext = modelPlanta;            
             modelPropietario.LoadPropietarios();
             modelPlanta.ListaPisos = new List<Piso>();
 
@@ -155,15 +155,18 @@ namespace Csharp_GestorComunidades.View
 
                 // Obtener la próxima letra disponible
                 char nuevaLetra = ObtenerProximaLetraDisponible(letrasAsignadas);
-
-                
+                modelPiso.LetraPiso = nuevaLetra;
+                modelPiso.NumPropietario = idPropietario;
+                modelPiso.NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
+                modelPiso.NumParking = rnd.Next(1, 11);
+                modelPiso.NumTrastero = rnd.Next(1, 11);
                 Piso newp = new Piso
                 {
-                    LetraPiso = nuevaLetra,
-                    NumPropietario = idPropietario,
-                    NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera),
-                    NumParking = rnd.Next(1, 11),
-                    NumTrastero = rnd.Next(1, 11),
+                    LetraPiso = modelPiso.LetraPiso,
+                    NumPropietario = modelPiso.NumPropietario,
+                    NumPlanta = modelPiso.NumPlanta,
+                    NumParking = modelPiso.NumParking,
+                    NumTrastero = modelPiso.NumTrastero,
                     ListaPropietarios = modelPiso.ListaPropietarios
 
                 };
@@ -171,8 +174,7 @@ namespace Csharp_GestorComunidades.View
                 modelPiso.ListPiso.Add(newp);
                 try
                 {
-                    modelPiso.newPiso(newp.LetraPiso, newp.NumParking, newp.NumTrastero, newp.NumPlanta, newp.NumPropietario);
-                    //modelPiso.newPiso();
+                    modelPiso.newPiso();
                     // Actualizar la lista de letras asignadas para la planta actual
                     dvgPisos.ItemsSource = modelPiso.ListPiso;
                     
@@ -239,16 +241,53 @@ namespace Csharp_GestorComunidades.View
         }
 
 
-        //Method to open NewPropietario (to create new one)
-        private void openNewPropietario(object sender, RoutedEventArgs e)
+        //Method to create random propietario
+        public void createNewPropietario(object sender, RoutedEventArgs e)
         {
-            NewPropietario propWindow = new NewPropietario();
+            //Arrays to put the value random
+            string[] nombres = { "Juan", "María", "Pedro", "Luisa", "Ana", "Carlos", "Elena", "José", "Laura", "David" };
+            string[] apellidos = { "García", "Rodríguez", "Fernández", "López", "Martínez", "Sánchez", "Pérez", "González", "Romero", "Torres" };
+            string[] DNIs = { "12345678A", "87654321B", "13579246C", "98765432D", "24681357E", "15926374F", "75395182G", "86420759H", "43857219J", "61724398K" };
+            string[] direcciones = { "Calle Principal 123", "Avenida Central 456", "Callejón Secundario 789", "Paseo Grande 321", "Plaza Pequeña 654", "Travesía Estrecha 987", "Ronda Ancha 246", "Prolongación Larga 135", "Bulevar Céntrico 789", "Pasaje Angosto 642" };
+            string[] ciudades = { "Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Málaga", "Zaragoza", "Murcia", "Palma", "Las Palmas" };
+            string[] provincias = { "Madrid", "Barcelona", "Valencia", "Sevilla", "Vizcaya", "Málaga", "Zaragoza", "Murcia", "Islas Baleares", "Las Palmas" };
+            int[] codigosPostales = { 28001, 08001, 46001, 41001, 48001, 29001, 50001, 30001, 70001, 35001 };
 
-            propWindow.ShowDialog();
 
+            Random rnd = new Random();
+            int nombreIndex = rnd.Next(nombres.Length);
+            int apellidoIndex = rnd.Next(apellidos.Length);
+            int dniIndex = rnd.Next(DNIs.Length);
+            int direccionIndex = rnd.Next(direcciones.Length);
+            int ciudadIndex = rnd.Next(ciudades.Length);
+            int provinciaIndex = rnd.Next(provincias.Length);
+            int cpIndex = rnd.Next(codigosPostales.Length);
+            modelPropietario.Name = nombres[nombreIndex];
+            modelPropietario.Surname = apellidos[apellidoIndex];
+            modelPropietario.DNI = DNIs[dniIndex];
+            modelPropietario.Address = direcciones[direccionIndex];
+            modelPropietario.City = ciudades[ciudadIndex];
+            modelPropietario.Provincia = provincias[provinciaIndex];
+            modelPropietario.CP = codigosPostales[cpIndex];
+            Propietario nuevoPropietario = new Propietario
+            {
+                Name = modelPropietario.Name,
+                Surname = modelPropietario.Surname,
+                DNI = modelPropietario.DNI,
+                Address = modelPropietario.Address,
+                City = modelPropietario.City,
+                Provincia = modelPropietario.Provincia,
+                CP = modelPropietario.CP
+            };
+
+            //Add propietary to DDBB and list
+            modelPropietario.ListPropietario.Add(nuevoPropietario);
+            modelPropietario.newPropietario();
+
+            MessageBox.Show($"Se ha creado {nombres[nombreIndex]} {apellidos[apellidoIndex]} con DNI: {DNIs[dniIndex]}");
             UpdatePropietariosComboBox();
-
         }
+
         #endregion
     }
 
