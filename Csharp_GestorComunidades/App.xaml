@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Csharp_GestorComunidades"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        
+
     </Application.Resources>
 </Application>
