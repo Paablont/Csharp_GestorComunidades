@@ -6,6 +6,9 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Csharp_GestorComunidades.View"
         mc:Ignorable="d"
+                 ResizeMode="CanResizeWithGrip"        
+BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+BorderThickness="5"
         Title="NewPortals" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>

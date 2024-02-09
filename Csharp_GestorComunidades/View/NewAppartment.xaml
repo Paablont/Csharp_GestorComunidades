@@ -6,6 +6,9 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Csharp_GestorComunidades.View"
         mc:Ignorable="d"
+                 ResizeMode="CanResizeWithGrip"        
+BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+BorderThickness="5"
         Title="NewAppartment" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="644" FontWeight="Bold"/>

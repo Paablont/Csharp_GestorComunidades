@@ -6,7 +6,10 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Csharp_GestorComunidades"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="CanResizeWithGrip"        
+        BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+        BorderThickness="5"
+        Title="Ventana Principal" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtTitulo" Content="GESTOR DE COMUNIDADES" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
         <Button x:Name="btnManageNBH" Content="Gestionar Comunidad" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Height="46" Width="148"/>

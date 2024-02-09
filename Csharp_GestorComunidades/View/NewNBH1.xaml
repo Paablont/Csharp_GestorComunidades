@@ -6,6 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Csharp_GestorComunidades"
         mc:Ignorable="d"
+                 ResizeMode="CanResizeWithGrip"        
+BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+BorderThickness="5"
         Title="NewNBH1" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtTitle"  Content="NUEVA COMUNIDAD" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
