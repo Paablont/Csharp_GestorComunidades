@@ -12,24 +12,26 @@ BorderThickness="5"
         Title="Pisos" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="644" FontWeight="Bold"/>
-        <ComboBox x:Name="cbbNumPlantas" ItemsSource="{Binding ListaPisos}" HorizontalAlignment="Left" Margin="232,123,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="txtPlanta" Content="Número de planta" HorizontalAlignment="Left" Margin="109,121,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbbNumPortal" SelectionChanged="CbbNumPortal_SelectionChanged" HorizontalAlignment="Left" Margin="232,72,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="txtPortales" Content="Número de portal" HorizontalAlignment="Left" Margin="110,77,0,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
-        <ComboBox x:Name="cbbNumEscaleras" SelectionChanged="CbbNumEscaleras_SelectionChanged" HorizontalAlignment="Left" Margin="525,72,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="txtEscalera" Content="Número de escalera" HorizontalAlignment="Left" Margin="385,77,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnNewPiso" Style="{DynamicResource MahApps.Styles.Button.Square}" Click="newAppartment" Content="AÑADIR PISO" HorizontalAlignment="Left" Margin="110,175,0,0" VerticalAlignment="Top" Height="37" Width="105" />
-        <ComboBox x:Name="cbbPropietarios" ItemsSource="{Binding ListPropietario}" HorizontalAlignment="Left" Margin="525,121,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cbbNumPlantas" ItemsSource="{Binding ListaPisos}" HorizontalAlignment="Left" Margin="204,133,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtPlanta" Content="Número de planta" HorizontalAlignment="Left" Margin="81,131,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbbNumPortal" SelectionChanged="CbbNumPortal_SelectionChanged" HorizontalAlignment="Left" Margin="204,82,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtPortales" Content="Número de portal" HorizontalAlignment="Left" Margin="82,87,0,0" VerticalAlignment="Top" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
+        <ComboBox x:Name="cbbNumEscaleras" SelectionChanged="CbbNumEscaleras_SelectionChanged" HorizontalAlignment="Left" Margin="497,82,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="txtEscalera" Content="Número de escalera" HorizontalAlignment="Left" Margin="357,87,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnNewPiso" Style="{DynamicResource MahApps.Styles.Button.Square}" Click="newAppartment" Content="AÑADIR PISO" HorizontalAlignment="Left" Margin="650,225,0,0" VerticalAlignment="Top" Height="37" Width="105" />
+        <ComboBox x:Name="cbbPropietarios" ItemsSource="{Binding ListPropietario}" HorizontalAlignment="Left" Margin="497,131,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnPropietario" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Click="createNewPropietario" Content="Crear propietario" HorizontalAlignment="Left" Margin="650,116,0,0" VerticalAlignment="Top" Height="40" Width="120"/>
-        <Label x:Name="txtPropietarios" Content="Propietario" HorizontalAlignment="Left" Margin="395,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,-0.08"/>
-        <Label x:Name="txtAVISO" Content="(para la creacion solo se le agrega 1 propietario y despues en la gestion se le puede añadir mas)" HorizontalAlignment="Left" Margin="154,217,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="110,248,87,10" Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
+        <Label x:Name="txtPropietarios" Content="Propietario" HorizontalAlignment="Left" Margin="395,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,-0.08"/>
+        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="73,188,195,45" Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
             <DataGrid.Columns>
                 <!---Para mostrarlo en el Datagrid se bindea con la clase objeto Piso-->
+                <DataGridTextColumn Header="Portal" Binding="{Binding NumPortal,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Escalera" Binding="{Binding NumStair,Mode=TwoWay}" Width="*"/>
                 <DataGridTextColumn Header="Planta" Binding="{Binding NumPlanta,Mode=TwoWay}" Width="*"/>
                 <DataGridTextColumn Header="Letra" Binding="{Binding LetraPiso,Mode=TwoWay}" Width="*"/>
                 <DataGridTextColumn Header="Propietario" Binding="{Binding NombrePropietario,Mode=TwoWay}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnFinalizar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Click="endCreation" Content="Terminar comunidad" HorizontalAlignment="Left" Margin="632,339,0,0" VerticalAlignment="Top" Height="40" Width="138" />
     </Grid>
 </mah:MetroWindow>

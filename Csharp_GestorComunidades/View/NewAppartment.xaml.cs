@@ -172,7 +172,8 @@ namespace Csharp_GestorComunidades.View
                     ListaPropietarios = modelPiso.ListaPropietarios,
                     NombrePropietario = modelPiso.getNomPropietario(idPropietario),
                     NumPlanta = cbbNumPlantas.SelectedIndex + 1,
-                    
+                    NumPortal = cbbNumPortal.SelectedIndex + 1,
+                    NumStair = cbbNumEscaleras.SelectedIndex + 1                   
 
                 };
                 modelPlanta.ListaPisos.Add(newp);
@@ -196,6 +197,14 @@ namespace Csharp_GestorComunidades.View
             else
             {
                 MessageBox.Show("Por favor, selecciona al menos un propietario. Si no sale ningun propietario en la lista, añada uno");
+            }
+        }
+
+        private void endCreation(object sender, EventArgs e)
+        {
+            if(modelPiso.ListPiso.Count == 0)
+            {
+                MessageBox.Show("Debes crear al menos 1 piso");
             }
         }
 
@@ -291,6 +300,24 @@ namespace Csharp_GestorComunidades.View
 
             MessageBox.Show($"Se ha creado {nombres[nombreIndex]} {apellidos[apellidoIndex]} con DNI: {DNIs[dniIndex]}");
             UpdatePropietariosComboBox();
+        }
+
+        //Method to close the creation of neighborhood
+        private void endCreation(object sender, RoutedEventArgs e)
+        {
+            bool plantasConPiso = false;
+
+            if (plantasConPiso)
+            {
+                
+                // Todas las plantas tienen al menos un piso creado, cerrar la ventana
+                this.Close();
+            }
+            else
+            {
+                // Mostrar un mensaje indicando que debe crear al menos un piso en cada planta
+                MessageBox.Show("Debe crear al menos un piso en cada planta antes de finalizar la creación de la comunidad.");
+            }
         }
 
         #endregion
