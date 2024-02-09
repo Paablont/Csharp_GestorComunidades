@@ -305,19 +305,7 @@ namespace Csharp_GestorComunidades.View
         //Method to close the creation of neighborhood
         private void endCreation(object sender, RoutedEventArgs e)
         {
-            bool plantasConPiso = false;
-
-            if (plantasConPiso)
-            {
-                
-                // Todas las plantas tienen al menos un piso creado, cerrar la ventana
-                this.Close();
-            }
-            else
-            {
-                // Mostrar un mensaje indicando que debe crear al menos un piso en cada planta
-                MessageBox.Show("Debe crear al menos un piso en cada planta antes de finalizar la creación de la comunidad.");
-            }
+            this.Close();
         }
 
         #endregion
