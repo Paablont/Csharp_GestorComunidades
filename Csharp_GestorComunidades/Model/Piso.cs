@@ -12,7 +12,8 @@ namespace Csharp_GestorComunidades.Clases
         #region ATRIBUTOS
         private char _letraPiso;
         private List<Propietario> _listaPropietarios;
-        private int _numPlanta;
+        private int _idPlanta,_numPlanta;
+        private string _nomPropietario;
         private int _numParking, _numTrastero, _numPropietario; //Estos campos se generan aleatoriamente
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -39,6 +40,16 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
+        public string NombrePropietario
+        {
+            get { return _nomPropietario; }
+            set
+            {
+                _nomPropietario = value;
+                OnPropertyChange(nameof(NombrePropietario));
+            }
+        }
+
         public List<Propietario> ListaPropietarios
         {
             get { return _listaPropietarios; }
@@ -49,16 +60,15 @@ namespace Csharp_GestorComunidades.Clases
             }
         }
 
-        public int NumPropietario
+        public int idPropietario
         {
             get { return _numPropietario; }
             set
             {
                 _numPropietario = value;
-                OnPropertyChange(nameof(NumPropietario));
+                OnPropertyChange(nameof(idPropietario));
             }
         }
-
         public int NumPlanta
         {
             get { return _numPlanta; }
@@ -66,6 +76,16 @@ namespace Csharp_GestorComunidades.Clases
             {
                 _numPlanta = value;
                 OnPropertyChange(nameof(NumPlanta));
+            }
+        }
+
+        public int idPlanta
+        {
+            get { return _idPlanta; }
+            set
+            {
+                _idPlanta = value;
+                OnPropertyChange(nameof(idPlanta));
             }
         }
 

@@ -157,18 +157,22 @@ namespace Csharp_GestorComunidades.View
                 // Obtener la próxima letra disponible
                 char nuevaLetra = ObtenerProximaLetraDisponible(letrasAsignadas);
                 modelPiso.LetraPiso = nuevaLetra;
-                modelPiso.NumPropietario = idPropietario;
-                modelPiso.NumPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
+                modelPiso.idPropietario = idPropietario;
+                modelPiso.idPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
                 modelPiso.NumParking = rnd.Next(1, 11);
                 modelPiso.NumTrastero = rnd.Next(1, 11);
+               
                 Piso newp = new Piso
                 {
                     LetraPiso = modelPiso.LetraPiso,
-                    NumPropietario = modelPiso.NumPropietario,
-                    NumPlanta = modelPiso.NumPlanta,
+                    idPropietario = modelPiso.idPropietario,
+                    idPlanta = modelPiso.idPlanta,
                     NumParking = modelPiso.NumParking,
                     NumTrastero = modelPiso.NumTrastero,
-                    ListaPropietarios = modelPiso.ListaPropietarios
+                    ListaPropietarios = modelPiso.ListaPropietarios,
+                    NombrePropietario = modelPiso.getNomPropietario(idPropietario),
+                    NumPlanta = cbbNumPlantas.SelectedIndex + 1,
+                    
 
                 };
                 modelPlanta.ListaPisos.Add(newp);
@@ -181,7 +185,7 @@ namespace Csharp_GestorComunidades.View
                     
                     letrasAsignadas.Add(newp.LetraPiso);
 
-                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.NumPropietario}");
+                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.idPropietario}");
                     
                 }
                 catch (Exception ex)

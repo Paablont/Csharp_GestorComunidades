@@ -19,8 +19,9 @@ namespace Csharp_GestorComunidades.ModelView
         private const String cnstr = "server=localhost;uid=pablo;pwd=pablo;database=comunidad";
         private char _letraPiso;
         private List<Propietario> _listaPropietarios;
-        private int _numPlanta;
-        private int _numParking, _numTrastero,_numPropietario; //Estos campos se generan aleatoriamente
+        private int _idPlanta, _numPlanta;
+        private string _nomPropietario;
+        private int _numParking, _numTrastero,_idPropietario; //Estos campos se generan aleatoriamente
         private ObservableCollection<Piso> _listPiso;
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string propertyName)
@@ -47,6 +48,16 @@ namespace Csharp_GestorComunidades.ModelView
             }
         }
 
+        public string NombrePropietario
+        {
+            get { return _nomPropietario; }
+            set
+            {
+                _nomPropietario = value;
+                OnPropertyChange(nameof(NombrePropietario));
+            }
+        }
+
         public List<Propietario> ListaPropietarios
         {
             get { return _listaPropietarios; }
@@ -56,16 +67,15 @@ namespace Csharp_GestorComunidades.ModelView
                 OnPropertyChange(nameof(ListaPropietarios));
             }
         }
-        public int NumPropietario
+        public int idPropietario
         {
-            get { return _numPropietario; }
+            get { return _idPropietario; }
             set
             {
-                _numPropietario = value;
-                OnPropertyChange(nameof(NumPropietario));
+                _idPropietario = value;
+                OnPropertyChange(nameof(idPropietario));
             }
         }
-
         public int NumPlanta
         {
             get { return _numPlanta; }
@@ -73,6 +83,16 @@ namespace Csharp_GestorComunidades.ModelView
             {
                 _numPlanta = value;
                 OnPropertyChange(nameof(NumPlanta));
+            }
+        }
+
+        public int idPlanta
+        {
+            get { return _idPlanta; }
+            set
+            {
+                _idPlanta = value;
+                OnPropertyChange(nameof(idPlanta));
             }
         }
 
@@ -113,7 +133,7 @@ namespace Csharp_GestorComunidades.ModelView
         {
             //Para meter booleanos en MySQL: (nombreVariable? 0 : 1)
             String SQL = $"INSERT INTO piso (letraPiso,idParking,idTrastero,idPlanta,idPropietario)" +
-                $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{NumPlanta}','{NumPropietario}');";
+                $" VALUES ('{LetraPiso}','{NumParking}','{NumTrastero}','{idPlanta}','{idPropietario}');";
             //usaremos las clases de la librería de MySQL para ejecutar queries
             //Instalar el paquete MySQL.Data
             MySQLDataComponent.ExecuteNonQuery(SQL, cnstr);
@@ -132,7 +152,7 @@ namespace Csharp_GestorComunidades.ModelView
                 ListPiso.Add(new Piso
                 {
                     LetraPiso = Convert.ToChar(i[1].ToString()),
-                    NumPropietario = int.Parse(i[2].ToString()),
+                    idPropietario = int.Parse(i[2].ToString()),
                     NumPlanta = int.Parse(i[3].ToString()),
                     NumParking = int.Parse(i[4].ToString()),
                     NumTrastero = int.Parse(i[5].ToString())
@@ -141,6 +161,33 @@ namespace Csharp_GestorComunidades.ModelView
             }
             dt.Dispose();
         }
+
+        public string getNomPropietario(int idPropietario)
+        {
+            string nomPropietario = "";
+            try
+            {
+                String SQL = $"SELECT nombre FROM propietario WHERE idpropietario = '{idPropietario}'";
+
+                // Ejecuta la consulta y obtén el resultado
+                object result = MySQLDataComponent.ExecuteScalar(SQL, cnstr);
+
+                // Verifica si se obtuvo un resultado no nulo
+                if (result != null)
+                {
+                    // Convierte el resultado a un tipo de datos adecuado (por ejemplo, int)
+                    nomPropietario = result.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja las excepciones, por ejemplo, muestra un mensaje o registra el error
+                MessageBox.Show($"Error al obtener el ID del portal: {ex.Message}");
+            }
+
+            return nomPropietario;
+        }
+
         #endregion
     }
 }

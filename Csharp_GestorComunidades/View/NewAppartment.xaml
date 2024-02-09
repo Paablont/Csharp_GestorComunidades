@@ -28,7 +28,7 @@ BorderThickness="5"
                 <!---Para mostrarlo en el Datagrid se bindea con la clase objeto Piso-->
                 <DataGridTextColumn Header="Planta" Binding="{Binding NumPlanta,Mode=TwoWay}" Width="*"/>
                 <DataGridTextColumn Header="Letra" Binding="{Binding LetraPiso,Mode=TwoWay}" Width="*"/>
-                <DataGridTextColumn Header="Propietario" Binding="{Binding NumPropietario,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Propietario" Binding="{Binding NombrePropietario,Mode=TwoWay}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
