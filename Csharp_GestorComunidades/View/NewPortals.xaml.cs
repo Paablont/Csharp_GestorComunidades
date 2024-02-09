@@ -1,5 +1,6 @@
 ﻿using Csharp_GestorComunidades.Clases;
 using Csharp_GestorComunidades.ModelView;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Csharp_GestorComunidades.View
         *******************************************************************              
     */
 
-    public partial class NewPortals : Window
+    public partial class NewPortals : MetroWindow
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();
         private PortalModelView modelPortal = new PortalModelView();

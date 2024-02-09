@@ -1,6 +1,7 @@
 ﻿using Csharp_GestorComunidades.Clases;
 using Csharp_GestorComunidades.ModelView;
 using Csharp_GestorComunidades.View;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Csharp_GestorComunidades
          *******************************************************************              
          */
 
-    public partial class NewNBH1 : Window
+    public partial class NewNBH1 : MetroWindow
     {
         private ComunidadModelView modelNBH = new ComunidadModelView();       
         private int numPortales, surface;

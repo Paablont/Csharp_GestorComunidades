@@ -1,5 +1,6 @@
 ﻿using Csharp_GestorComunidades.ModelView;
 using Csharp_GestorComunidades.View;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ using System.Windows.Shapes;
 namespace Csharp_GestorComunidades
 {
    
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         
         public MainWindow()

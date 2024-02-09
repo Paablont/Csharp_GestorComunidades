@@ -1,5 +1,6 @@
 ﻿using Csharp_GestorComunidades.Clases;
 using Csharp_GestorComunidades.ModelView;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +20,7 @@ using System.Windows.Shapes;
 namespace Csharp_GestorComunidades.View
 {
 
-    public partial class NewAppartment : Window
+    public partial class NewAppartment : MetroWindow
     {
         PlantaModelView modelPlanta;
         EscaleraModelView modelStair;
