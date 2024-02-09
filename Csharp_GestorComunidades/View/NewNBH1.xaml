@@ -9,7 +9,7 @@
                  ResizeMode="CanResizeWithGrip"        
 BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
 BorderThickness="5"
-        Title="NewNBH1" Height="450" Width="800">
+        Title="Comunidad" Height="450" Width="800">
     <Grid>
         <Label x:Name="txtTitle"  Content="NUEVA COMUNIDAD" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <TextBox x:Name="tbNameNBH" Text="{Binding NameNeighborhood, Mode=TwoWay}" HorizontalAlignment="Left" Margin="205,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -20,7 +20,7 @@ BorderThickness="5"
         <Label x:Name="txtMetros" Content="Superficie de la comunidad (m2)" HorizontalAlignment="Left" Margin="368,128,0,0" VerticalAlignment="Top"/>
         <Label x:Name="txtNumPortales" Content="Define el número de portales" HorizontalAlignment="Left" Margin="368,88,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbMetros" Text="{Binding Surface, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnNext"  Content="Siguiente" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="addNeighborhood"/>
+        <Button x:Name="btnNext" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" Height="31" Width="100" Click="addNeighborhood" Content="SIGUIENTE"/>
         <TextBox x:Name="tbNumPortales" Text="{Binding NumPortales, Mode=TwoWay}" HorizontalAlignment="Left" Margin="554,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <CheckBox x:Name="cbPiscina" IsChecked="{Binding HasPool, Mode=TwoWay}" Content="¿Tiene piscina?" HorizontalAlignment="Left" Margin="57,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>
         <CheckBox x:Name="cbGimnasio" IsChecked="{Binding HasGym, Mode=TwoWay}" Content="¿Tiene gimnasio?" HorizontalAlignment="Left" Margin="57,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.269,0.276"/>

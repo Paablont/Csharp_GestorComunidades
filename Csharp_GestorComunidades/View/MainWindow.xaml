@@ -9,11 +9,12 @@
         ResizeMode="CanResizeWithGrip"        
         BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
         BorderThickness="5"
-        Title="Ventana Principal" Height="450" Width="800">
+        Title="Gestor de Comunidades" Height="450" Width="800">
+
     <Grid>
         <Label x:Name="txtTitulo" Content="GESTOR DE COMUNIDADES" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
-        <Button x:Name="btnManageNBH" Content="Gestionar Comunidad" HorizontalAlignment="Center" Margin="0,126,0,0" VerticalAlignment="Top" Height="46" Width="148"/>
-        <Button x:Name="btnCreateNBH" Content="Crear una nueva comunidad" HorizontalAlignment="Center" VerticalAlignment="Center" Height="46" Width="200" Click="OpenNewComunity"/>
+        <Button x:Name="btnManageNBH" Style="{StaticResource MahApps.Styles.Button.Square}" Content="Gestionar Comunidad" HorizontalAlignment="Center" Margin="0,146,0,0" VerticalAlignment="Top" Height="46" Width="148"/>
+        <Button x:Name="btnCreateNBH" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="CREAR COMUNIDAD" HorizontalAlignment="Center" VerticalAlignment="Top" Height="46" Width="200" Click="OpenNewComunity" FontWeight="Normal" FontSize="18" Margin="0,212,0,0"/>
 
     </Grid>
 </mah:MetroWindow>
