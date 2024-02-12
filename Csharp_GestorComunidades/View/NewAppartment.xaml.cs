@@ -185,18 +185,15 @@ namespace Csharp_GestorComunidades.View
                     dvgPisos.ItemsSource = modelPiso.ListPiso;
 
                     letrasAsignadas.Add(newp.LetraPiso);
-
-                    MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.idPropietario}");
-
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al añadir un piso");
+                    MessageBox.Show("Error al añadir un piso. Hay campos vacíos");
                 }
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona al menos un propietario. Si no sale ningun propietario en la lista, añada uno");
+                MessageBox.Show("Por favor, selecciona al menos un propietario. Si no sale ningún propietario en la lista, añada uno");
             }
         }
 

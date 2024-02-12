@@ -224,12 +224,12 @@ namespace Csharp_GestorComunidades.View
                 DataGridTextColumn stairColumn = new DataGridTextColumn();
                 stairColumn.Header = "Escalera";
                 stairColumn.Binding = new Binding("Escalera");
-
+                stairColumn.Width = new DataGridLength(1,DataGridLengthUnitType.Star);
 
                 DataGridTextColumn plantsColumn = new DataGridTextColumn();
                 plantsColumn.Header = "Plantas";
                 plantsColumn.Binding = new Binding("Plantas");
-
+                plantsColumn.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
                 // Agregar las columnas al DataGrid
                 newDataGrid.Columns.Add(stairColumn);
                 newDataGrid.Columns.Add(plantsColumn);
