@@ -197,14 +197,6 @@ namespace Csharp_GestorComunidades.View
             }
         }
 
-        private void endCreation(object sender, EventArgs e)
-        {
-            if (modelPiso.ListPiso.Count == 0)
-            {
-                MessageBox.Show("Debes crear al menos 1 piso");
-            }
-        }
-
         private List<char> ObtenerOInicializarLetrasAsignadas(int idPlanta)
         {
             // Buscar la lista de letras asignadas para la planta actual
