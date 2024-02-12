@@ -40,7 +40,7 @@ namespace Csharp_GestorComunidades.View
             modelPlanta = plantas;
             modelStair = escaleras;
             modelPortal = portales;
-            DataContext = modelPlanta;            
+            DataContext = modelPlanta;
             modelPropietario.LoadPropietarios();
             modelPlanta.ListaPisos = new List<Piso>();
 
@@ -145,7 +145,7 @@ namespace Csharp_GestorComunidades.View
         {
             if (cbbPropietarios.SelectedIndex >= 0)
             {
-                
+
                 Random rnd = new Random();
                 int idPortal = modelPortal.getIDPortal(modelPortal.IDNBH, (cbbNumPortal.SelectedIndex + 1));
                 int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
@@ -161,7 +161,7 @@ namespace Csharp_GestorComunidades.View
                 modelPiso.idPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
                 modelPiso.NumParking = rnd.Next(1, 11);
                 modelPiso.NumTrastero = rnd.Next(1, 11);
-               
+
                 Piso newp = new Piso
                 {
                     LetraPiso = modelPiso.LetraPiso,
@@ -173,7 +173,7 @@ namespace Csharp_GestorComunidades.View
                     NombrePropietario = modelPiso.getNomPropietario(idPropietario),
                     NumPlanta = cbbNumPlantas.SelectedIndex + 1,
                     NumPortal = cbbNumPortal.SelectedIndex + 1,
-                    NumStair = cbbNumEscaleras.SelectedIndex + 1                   
+                    NumStair = cbbNumEscaleras.SelectedIndex + 1
 
                 };
                 modelPlanta.ListaPisos.Add(newp);
@@ -183,11 +183,11 @@ namespace Csharp_GestorComunidades.View
                     modelPiso.newPiso();
                     // Actualizar la lista de letras asignadas para la planta actual
                     dvgPisos.ItemsSource = modelPiso.ListPiso;
-                    
+
                     letrasAsignadas.Add(newp.LetraPiso);
 
                     MessageBox.Show($"Piso {newp.LetraPiso} añadido a la planta con id {newp.NumPlanta} correctamente. El propietario tiene id: {newp.idPropietario}");
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -202,7 +202,7 @@ namespace Csharp_GestorComunidades.View
 
         private void endCreation(object sender, EventArgs e)
         {
-            if(modelPiso.ListPiso.Count == 0)
+            if (modelPiso.ListPiso.Count == 0)
             {
                 MessageBox.Show("Debes crear al menos 1 piso");
             }
@@ -243,13 +243,13 @@ namespace Csharp_GestorComunidades.View
         {
             numPropietariosString.Clear();
 
-            
+
             for (int i = 0; i < modelPropietario.ListPropietario.Count; i++)
             {
                 numPropietariosString.Add($"{modelPropietario.ListPropietario[i].Name}  {modelPropietario.ListPropietario[i].Surname},{modelPropietario.ListPropietario[i].DNI} ");
             }
 
-            
+
             cbbPropietarios.ItemsSource = null;
             cbbPropietarios.ItemsSource = numPropietariosString;
         }
@@ -305,7 +305,25 @@ namespace Csharp_GestorComunidades.View
         //Method to close the creation of neighborhood
         private void endCreation(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            bool emptyPlanta = false;
+
+            for (int i = 0; i < modelPlanta.ListaPisos.Count; i++)
+            {
+                if (modelPlanta.ListaPisos[i].NumPlanta == 0)
+                {
+                    emptyPlanta = true;
+                }
+            }
+            if (emptyPlanta)
+            {
+                MessageBox.Show("Error al finalizar la creación de la comunidad. Todas las plantas deben tener como mínimo un piso");
+
+            }
+            else
+            {
+                this.Close();
+
+            }
         }
 
         #endregion

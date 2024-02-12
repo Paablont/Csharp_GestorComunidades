@@ -13,6 +13,7 @@ namespace Csharp_GestorComunidades.Clases
         private int _numEscalera;
         private List<Planta> _listaPlantas;
         private int _numPortal;
+        private int _numPlantas;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string propertyName)
@@ -37,6 +38,15 @@ namespace Csharp_GestorComunidades.Clases
             { 
                 _numEscalera = value;
                 OnPropertyChange(nameof(NumEscalera));
+            }
+        }
+        public int NumPlantas
+        {
+            get { return _numPlantas; }
+            set
+            {
+                _numPlantas = value;
+                OnPropertyChange(nameof(NumPlantas));
             }
         }
 

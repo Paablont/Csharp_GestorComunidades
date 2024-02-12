@@ -29,14 +29,16 @@ namespace Csharp_GestorComunidades.View
         private PortalModelView modelPortal = new PortalModelView();
         private EscaleraModelView modelStair = new EscaleraModelView();
         private PlantaModelView modelPlanta = new PlantaModelView();
-        
+        //List for Datagrid
+        private List<DataGrid> stairDataGrids = new List<DataGrid>();
+
         Comunidad neighb;
 
         #region CT
         public NewPortals(Comunidad nbh)
         {
             InitializeComponent();
-            DataContext = modelPortal;
+            DataContext = modelStair;
             modelNBH.LoadNBH();
             neighb = nbh;
             txtNBHName.Content = neighb.NameNeighborhood;
@@ -47,7 +49,7 @@ namespace Csharp_GestorComunidades.View
             //Obtain ID from actual neighborhood
             modelPortal.IDNBH = modelNBH.getIDNBH(nbh.NameNeighborhood);
 
-            
+
 
             //Initialice list of Plantas in Stairs
             modelStair.ListaPlantas = new List<Planta>();
@@ -68,7 +70,7 @@ namespace Csharp_GestorComunidades.View
                 modelPortal.ListPortals.Add(p);
                 modelPortal.newPortal();
                 neighb.ListaPortales.Add(p);
-            }          
+            }
 
         }
         #endregion
@@ -80,8 +82,8 @@ namespace Csharp_GestorComunidades.View
         private void addPortals(object sender, RoutedEventArgs e)
         {
             bool emptyStairs = false;
-           
-            for(int i= 0;i< modelPortal.ListPortals.Count;i++)
+
+            for (int i = 0; i < modelPortal.ListPortals.Count; i++)
             {
                 if (modelPortal.ListPortals[i].NumStairs == 0)
                 {
@@ -96,7 +98,7 @@ namespace Csharp_GestorComunidades.View
             else
             {
                 MessageBox.Show("Portales añadidos");
-                NewAppartment windowAppart = new NewAppartment(modelPlanta, modelStair,modelPortal);
+                NewAppartment windowAppart = new NewAppartment(modelPlanta, modelStair, modelPortal);
                 windowAppart.Show();
                 this.Hide();
             }
@@ -105,10 +107,10 @@ namespace Csharp_GestorComunidades.View
         //Method to add stairs to each portal
         private void addStairs(object sender, RoutedEventArgs e)
         {
-            String numPlantas;            
+            String numPlantas;
             numPlantas = tboxNumPlantas.Text.ToString();
 
-            
+
 
             //Check if tboxNumPlantas is empty or less than 1 or not numberINT
             if ((!int.TryParse(numPlantas, out int numPlantasINT) || (string.IsNullOrEmpty(numPlantas) || numPlantasINT < 1)))
@@ -121,9 +123,9 @@ namespace Csharp_GestorComunidades.View
                 numPlantasINT = int.Parse(numPlantas);
 
                 TabItem activeTab = tbControlPortals.SelectedItem as TabItem;
-                
 
-                
+
+
                 //To make sure in which portal are we add stairs
                 int actualNumStairs;
                 if (activeTab != null)
@@ -131,26 +133,29 @@ namespace Csharp_GestorComunidades.View
                     //Get the index+1 of the actual tabItem( Portal 1 index 0+1, portal 2 index 1+1...)
                     int numPortalINDEX = tbControlPortals.Items.IndexOf(activeTab) + 1;
 
-                    //Get the actual numStairsString the Portal has
-                    actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
-                    actualNumStairs++;
-                    modelPortal.NumStairs = actualNumStairs;
-                    //Add numStairsString to the DDBB
-                    modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
-                    //Add numStairsString to the listPortals
-                    modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs;
-                    
-                    modelStair.NumPortal = modelPortal.getIDPortal(modelPortal.IDNBH, numPortalINDEX);
-                    modelStair.NumEscalera = modelPortal.NumStairs;
-
                     try
                     {
+                        //Get the actual numStairsString the Portal has
+                        actualNumStairs = modelPortal.getNumStairs(numPortalINDEX, modelPortal.IDNBH);
+                        actualNumStairs++;
+                        modelPortal.NumStairs = actualNumStairs;
+                        //Add numStairsString to the DDBB
+                        modelPortal.updatePortalStairs(numPortalINDEX, modelPortal.NumStairs, modelPortal.IDNBH);
+                        //Add numStairsString to the listPortals
+                        modelPortal.ListPortals[numPortalINDEX - 1].NumStairs = modelPortal.NumStairs;
+
+                        modelStair.NumPortal = modelPortal.getIDPortal(modelPortal.IDNBH, numPortalINDEX);
+                        modelStair.NumEscalera = modelPortal.NumStairs;
+
+
                         //Add stairs to the DDBB and listOfStairs
                         Escalera newStair = new Escalera
                         {
                             NumEscalera = modelStair.NumEscalera,
                             NumPortal = modelStair.NumPortal,
-                            ListaPlantas = modelStair.ListaPlantas
+                            ListaPlantas = modelStair.ListaPlantas,
+                            NumPlantas = numPlantasINT
+
 
                         };
 
@@ -162,7 +167,7 @@ namespace Csharp_GestorComunidades.View
                     catch (Exception ex)
                     {
                         MessageBox.Show("No se han podido añadir escaleras a la BBDD");
-                    }                  
+                    }
 
                     try
                     {
@@ -171,13 +176,13 @@ namespace Csharp_GestorComunidades.View
                         {
                             Planta p = new Planta
                             {
-                                NumPlanta = (i+1),
+                                NumPlanta = (i + 1),
                                 NumEscalera = modelStair.getIDStair(modelStair.NumPortal, modelStair.NumEscalera),
                                 ListaPisos = modelPlanta.ListaPisos
                             };
                             modelPlanta.ListPlanta.Add(p);
                             modelStair.ListaPlantas.Add(p);
-                            modelPlanta.newPlanta(p.NumPlanta,p.NumEscalera);
+                            modelPlanta.newPlanta(p.NumPlanta, p.NumEscalera);
                             //modelPlanta.newPlanta();
                         }
                     }
@@ -185,10 +190,17 @@ namespace Csharp_GestorComunidades.View
                     {
                         MessageBox.Show("No se han podido añadir plantas a la BBDD");
                     }
-                    MessageBox.Show($"Se ha añadido una nueva escalera al portal {numPortalINDEX}. " +
-                        $"\nEscaleras totales del portal {numPortalINDEX}: {modelPortal.NumStairs}." +
-                        $"\nLa escalera se ha añadido con {numPlantasINT} plantas");
-
+                    
+                    //Update datagrid with NumStair and NumPlantas has each stair
+                    DataGrid dataGrid = stairDataGrids[numPortalINDEX - 1];
+                    dataGrid.Items.Clear(); 
+                    foreach (Escalera stair in modelStair.ListStairs)
+                    {
+                        if (stair.NumPortal == modelStair.NumPortal)
+                        {
+                            dataGrid.Items.Add(new { Escalera = stair.NumEscalera, Plantas = stair.NumPlantas });
+                        }
+                    }
 
                 }
 
@@ -204,15 +216,32 @@ namespace Csharp_GestorComunidades.View
                 TabItem newTabItem = new TabItem();
                 newTabItem.Header = $"Portal nº {i}";
 
-                
+                // Crear un DataGrid para mostrar las escaleras
                 DataGrid newDataGrid = new DataGrid();
-               
+                newDataGrid.AutoGenerateColumns = false;
 
-               
+                // Crear las columnas para el DataGrid
+                DataGridTextColumn stairColumn = new DataGridTextColumn();
+                stairColumn.Header = "Escalera";
+                stairColumn.Binding = new Binding("Escalera");
+
+
+                DataGridTextColumn plantsColumn = new DataGridTextColumn();
+                plantsColumn.Header = "Plantas";
+                plantsColumn.Binding = new Binding("Plantas");
+
+                // Agregar las columnas al DataGrid
+                newDataGrid.Columns.Add(stairColumn);
+                newDataGrid.Columns.Add(plantsColumn);
+
+                // Agregar el DataGrid al TabItem
                 newTabItem.Content = newDataGrid;
 
-                
+                // Agregar el TabItem al TabControl
                 tbControlPortals.Items.Add(newTabItem);
+
+                // Agregar el DataGrid a la lista
+                stairDataGrids.Add(newDataGrid);
             }
         }
 
