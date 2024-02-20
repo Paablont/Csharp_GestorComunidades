@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Csharp_GestorComunidades
 {
    
@@ -36,7 +37,11 @@ namespace Csharp_GestorComunidades
            
         }
 
-        
+        private void OpenReport(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
     }
 }

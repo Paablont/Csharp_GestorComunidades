@@ -17,4 +17,8 @@
     <PackageReference Include="MySqlConnector" Version="2.3.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CrystalReport\CrystalReport.csproj" />
+  </ItemGroup>
+
 </Project>

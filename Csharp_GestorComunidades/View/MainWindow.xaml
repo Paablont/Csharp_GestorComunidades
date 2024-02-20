@@ -15,6 +15,7 @@
         <Label x:Name="txtTitulo" Content="GESTOR DE COMUNIDADES" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
         <Button x:Name="btnManageNBH" Style="{StaticResource MahApps.Styles.Button.Square}" Content="Gestionar Comunidad" HorizontalAlignment="Center" Margin="0,146,0,0" VerticalAlignment="Top" Height="46" Width="148"/>
         <Button x:Name="btnCreateNBH" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="CREAR COMUNIDAD" HorizontalAlignment="Center" VerticalAlignment="Top" Height="46" Width="200" Click="OpenNewComunity" FontWeight="Normal" FontSize="18" Margin="0,212,0,0"/>
+        <Button x:Name="btnReport" Click="OpenReport" Style="{StaticResource MahApps.Styles.Button.Square}" Content="Abrir Informe" HorizontalAlignment="Left" Margin="566,332,0,0" VerticalAlignment="Top" Height="46" Width="148"/>
 
     </Grid>
 </mah:MetroWindow>
