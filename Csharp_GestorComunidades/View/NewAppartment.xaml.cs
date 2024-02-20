@@ -151,12 +151,11 @@ namespace Csharp_GestorComunidades.View
                 int idEscalera = modelStair.getIDStair(idPortal, (cbbNumEscaleras.SelectedIndex + 1));
                 int idPropietario = modelPropietario.getIDPropietario((modelPropietario.ListPropietario[cbbPropietarios.SelectedIndex].DNI)); ;
                 int idPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
-                // Obtener o inicializar la lista de letras asignadas para la planta actual
-                List<char> letrasAsignadas = ObtenerOInicializarLetrasAsignadas(idPlanta);
+                
 
-                // Obtener la próxima letra disponible
-                char nuevaLetra = ObtenerProximaLetraDisponible(letrasAsignadas);
-                modelPiso.LetraPiso = nuevaLetra;
+                
+                char newLetter = NextLetter(idPlanta);
+                modelPiso.LetraPiso = newLetter;
                 modelPiso.idPropietario = idPropietario;
                 modelPiso.idPlanta = modelPlanta.getIDPlanta((cbbNumPlantas.SelectedIndex + 1), idEscalera);
                 modelPiso.NumParking = rnd.Next(1, 11);
@@ -182,9 +181,7 @@ namespace Csharp_GestorComunidades.View
                 {
                     modelPiso.newPiso();
                     // Actualizar la lista de letras asignadas para la planta actual
-                    dvgPisos.ItemsSource = modelPiso.ListPiso;
-
-                    letrasAsignadas.Add(newp.LetraPiso);
+                    dvgPisos.ItemsSource = modelPiso.ListPiso;                    
                 }
                 catch (Exception ex)
                 {
@@ -197,34 +194,21 @@ namespace Csharp_GestorComunidades.View
             }
         }
 
-        private List<char> ObtenerOInicializarLetrasAsignadas(int idPlanta)
-        {
-            // Buscar la lista de letras asignadas para la planta actual
-            var letrasAsignadas = modelPlanta.ListaPisos
-                .Where(p => p.NumPlanta == idPlanta)
+        //Obtain next letter for each appartment create
+        private char NextLetter(int idPlanta)
+        {            
+            var letterAsigned = modelPlanta.ListaPisos
+                .Where(p => p.idPlanta == idPlanta)
                 .Select(p => p.LetraPiso)
                 .ToList();
-
-            // Si la lista no existe, inicializarla
-            if (letrasAsignadas == null)
+           
+            char newLetter = 'A';
+            while (letterAsigned.Contains(newLetter))
             {
-                letrasAsignadas = new List<char>();
+                newLetter++;
             }
 
-            return letrasAsignadas;
-        }
-
-        private char ObtenerProximaLetraDisponible(List<char> letrasAsignadas)
-        {
-            // Obtener la próxima letra disponible que no ha sido asignada
-            char nuevaLetra = 'A';
-
-            while (letrasAsignadas.Contains(nuevaLetra))
-            {
-                nuevaLetra++;
-            }
-
-            return nuevaLetra;
+            return newLetter;
         }
 
         //Update Combobox propietarios if you add new one

@@ -22,7 +22,7 @@ BorderThickness="5"
         <ComboBox x:Name="cbbPropietarios" ItemsSource="{Binding ListPropietario}" HorizontalAlignment="Left" Margin="497,131,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnPropietario" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Click="createNewPropietario" Content="Crear propietario" HorizontalAlignment="Left" Margin="650,116,0,0" VerticalAlignment="Top" Height="40" Width="120"/>
         <Label x:Name="txtPropietarios" Content="Propietario" HorizontalAlignment="Left" Margin="395,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,-0.08"/>
-        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="73,188,195,45" Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
+        <DataGrid x:Name="dvgPisos" AutoGenerateColumns="False" IsReadOnly="True" Margin="73,223,195,10" Style="{StaticResource MahApps.Styles.DataGrid.Azure}">
             <DataGrid.Columns>
                 <!---Para mostrarlo en el Datagrid se bindea con la clase objeto Piso-->
                 <DataGridTextColumn Header="Portal" Binding="{Binding NumPortal,Mode=TwoWay}" Width="*"/>
@@ -33,5 +33,6 @@ BorderThickness="5"
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnFinalizar" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Click="endCreation" Content="Terminar comunidad" HorizontalAlignment="Left" Margin="632,339,0,0" VerticalAlignment="Top" Height="40" Width="138" />
+        <Label x:Name="txtPropietarios_Copiar" Content="Solo se añadirá un propietario a la hora de la creación" HorizontalAlignment="Left" Margin="204,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,-0.08"/>
     </Grid>
 </mah:MetroWindow>
