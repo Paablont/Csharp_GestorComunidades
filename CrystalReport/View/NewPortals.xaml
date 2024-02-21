@@ -1,0 +1,29 @@
+﻿<mah:MetroWindow x:Class="Csharp_GestorComunidades.View.NewPortals"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Csharp_GestorComunidades.View"
+        mc:Ignorable="d"
+                 ResizeMode="CanResizeWithGrip"        
+BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+BorderThickness="5"
+        Title="Portales" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="674*"/>
+            <ColumnDefinition Width="127*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="txtNBHName" Content="" HorizontalAlignment="Left" Margin="51,28,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="643" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Label x:Name="txtNumPortals" Content="Elige un número de portal y añadele las escaleras que necesite" HorizontalAlignment="Left" Margin="187,73,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TabControl x:Name="tbControlPortals" Margin="33,109,89,10" Style="{DynamicResource MahApps.Styles.TabControl.Animated}"/>
+        <Button x:Name="btnAddPortals" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Añadir portales" HorizontalAlignment="Left" Margin="624,355,0,0" VerticalAlignment="Top" Height="45" Width="140" FontSize="14" Click="addPortals" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAddStairs" Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Añadir Escalera" HorizontalAlignment="Left" Margin="610,217,0,0" VerticalAlignment="Top" Height="46" Width="140" FontSize="14" Click="addStairs" Grid.ColumnSpan="2" />
+        <TextBox x:Name="tboxNumPlantas" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="610,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" FontSize="16" Height="34"/>
+        <Label x:Name="txtNumPlantas" Content="Número de plantas en la escalera" HorizontalAlignment="Left" Margin="581,133,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="44" Width="198"/>
+
+
+
+    </Grid>
+</mah:MetroWindow>
